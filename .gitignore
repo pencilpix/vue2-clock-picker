@@ -1,0 +1,14 @@
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/resources/assets/color-admin
+modules/cave360
+public/media
+stats
+.DS_Store
+/dist

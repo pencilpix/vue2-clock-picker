@@ -1,0 +1,35 @@
+rules:
+  # Don't use quotes on attribute value (eg: span[lang=pt])
+  attribute-quotes:
+    - 2 # Error
+    -
+      include: false
+  # Force maximum BEM depth
+  nesting-depth:
+    - 2
+    -
+      max-depth: 3
+
+
+  variable-name-format:
+    - 2
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedlowercase
+      convention-explanation: 'Variables must contain only lowercase letters and hyphens'
+
+  class-name-format:
+    - 2
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedbem
+      convention-explanation: 'Class must contain only lowercase letters, underscores and hyphens'
+
+  placeholder-name-format:
+    - 2
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedbem
+      convention-explanation: 'Class must contain only lowercase letters, underscores and hyphens'
+
+
