@@ -1,0 +1,29 @@
+//////////////////////////////////////////////////////////////
+// set container (circle) position and place items          //
+// on the contour of the container depending on class of    //
+// container and its child element class and modifier       //
+// class as number.                                        //
+//////////////////////////////////////////////////////////////
+=place-on-circle($block: circle, $element: item, $modifier: 5, $count: 12, $size: 200px, $item-size: 20px)
+  $rotation: -90deg
+  $angle: 360 / $count
+
+  .#{$block}
+    border-radius: 50%
+    height: $size
+    position: relative
+    width: $size
+
+    .#{$block}__#{$element}
+      left: 50%
+      margin: -($item-size / 2)
+      position: absolute
+      top: 50%
+
+      @for $i from 0 to $count
+        &.#{$block}__#{$element}--#{$modifier * $i}
+          transform: rotate($rotation) translate($size/2) rotate(-$rotation)
+
+        $rotation: $rotation + $angle
+
+

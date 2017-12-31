@@ -1,0 +1,27 @@
+const path = require('path');
+const config = require('./webpack.base');
+const merge = require('webpack-merge');
+
+module.exports = [
+  merge(config, {
+    entry: path.resolve(__dirname, '../src/index.js'),
+    output: {
+      filename: 'vue-clock-picker.min.js',
+      libraryTarget: 'window',
+      library: 'VueClockPicker',
+    },
+  }),
+
+  merge(config, {
+    entry: path.resolve(__dirname, '../src/components/ClockPicker.vue'),
+    output: {
+      filename: 'vue-clock-picker.js',
+      libraryTarget: 'umd',
+      library: 'vue-clock-picker',
+      umdNamedDefine: true,
+    },
+  }),
+];
+
+
+
