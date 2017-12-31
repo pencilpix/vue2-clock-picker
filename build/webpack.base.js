@@ -95,7 +95,7 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
 
     new ExtractTextPlugin({
-      filename: 'vue-clockpicker.min.css',
+      filename: 'vue-clock-picker.min.css',
     }),
   ],
 };
