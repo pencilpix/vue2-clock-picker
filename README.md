@@ -1,23 +1,26 @@
-# Vue Clock Picker
+# Vue2 Clock Picker
 
 A simple clock picker component for `vue v2.x`.
+
+
+![Screenshot](https://github.com/pencilpix/screenshot.png)
 
 ### Installation
 
 ```
-$ npm install vue-clock-picker --save
+$ npm install vue2-clock-picker --save
 ```
 or
 
 ```
-$ yarn add vue-clock-picker
+$ yarn add vue2-clock-picker
 ```
 
   - __In Browser:__
 
     ```html
     <script src="node_modules/vuejs/dist/vue.min.js"></script>
-    <script src="path/to/vue-clock-picker/dist/vue-clock-picker.min.js">
+    <script src="path/to/vue2-clock-picker/dist/vue2-clock-picker.min.js">
 
     <script>
       Vue.use(VueClockPicker);
@@ -26,7 +29,7 @@ $ yarn add vue-clock-picker
 
   - __Module:__
       ```js
-      import VueClockPicker from 'vue-clock-picker';
+      import VueClockPicker from 'vue2-clock-picker';
       ```
 
 
