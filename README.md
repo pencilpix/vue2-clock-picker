@@ -19,12 +19,11 @@ $ yarn add @pencilpix/vue2-clock-picker
   - __In Browser:__
 
     ```html
-    <script src="node_modules/vuejs/dist/vue.min.js"></script>
-    <script src="path/to/vue2-clock-picker/dist/vue2-clock-picker.min.js">
+    <link href="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css"></link>
 
-    <script>
-      Vue.use(VueClockPicker);
-    </script>
+
+    <script src="node_modules/vuejs/dist/vue.min.js"></script>
+    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.js">
     ```
 
   - __Module:__

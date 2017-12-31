@@ -7,7 +7,7 @@ module.exports = [
     entry: path.resolve(__dirname, '../src/index.js'),
     output: {
       filename: 'vue2-clock-picker.min.js',
-      libraryTarget: 'window',
+      libraryTarget: 'umd',
       library: 'VueClockPicker',
     },
   }),
