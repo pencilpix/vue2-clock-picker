@@ -1,6 +1,6 @@
 {
-  "name": "vue2-clock-picker",
-  "version": "0.0.1",
+  "name": "@pencilpix/vue2-clock-picker",
+  "version": "0.0.3",
   "description": "vuejs clock picker component",
   "main": "dist/vue2-clock-picker.js",
   "scripts": {
