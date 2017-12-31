@@ -9,7 +9,7 @@
             'minutes__item--small': isSmall(item),
             'minutes__item--selected': item === value,
           }">
-        <button class="clock-picker__button"
+        <button type="button" class="clock-picker__button"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}

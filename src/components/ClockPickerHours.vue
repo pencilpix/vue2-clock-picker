@@ -5,7 +5,7 @@
           v-for="item in pm"
           :key="item"
           :class="['pm__item--' + itemClass(item), item === value ? 'pm__item--selected' : '']">
-        <button class="clock-picker__button"
+        <button type="button" class="clock-picker__button"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}
@@ -18,7 +18,7 @@
           v-for="item in am"
           :key="item"
           :class="'am__item--' + itemClass(item)">
-        <button class="clock-picker__button"
+        <button type="button" class="clock-picker__button"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}

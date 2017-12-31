@@ -18,8 +18,8 @@
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
-          <button class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
-          <button class="clock-picker__dialog-action" @click="done">DONE</button>
+          <button type="button" class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
+          <button type="button" class="clock-picker__dialog-action" @click="done">DONE</button>
         </div>
       </div>
     </transition>
