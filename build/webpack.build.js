@@ -6,7 +6,7 @@ module.exports = [
   merge(config, {
     entry: path.resolve(__dirname, '../src/index.js'),
     output: {
-      filename: 'vue-clock-picker.min.js',
+      filename: 'vue2-clock-picker.min.js',
       libraryTarget: 'window',
       library: 'VueClockPicker',
     },
@@ -15,9 +15,9 @@ module.exports = [
   merge(config, {
     entry: path.resolve(__dirname, '../src/components/ClockPicker.vue'),
     output: {
-      filename: 'vue-clock-picker.js',
+      filename: 'vue2-clock-picker.js',
       libraryTarget: 'umd',
-      library: 'vue-clock-picker',
+      library: 'vue2-clock-picker',
       umdNamedDefine: true,
     },
   }),
