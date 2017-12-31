@@ -3,17 +3,17 @@
 A simple clock picker component for `vue v2.x`.
 
 
-![Screenshot](https://github.com/pencilpix/screenshot.png)
+![Screenshot](./screenshot.png)
 
 ### Installation
 
 ```
-$ npm install vue2-clock-picker --save
+$ npm install @pencilpix/vue2-clock-picker --save
 ```
 or
 
 ```
-$ yarn add vue2-clock-picker
+$ yarn add @pencilpix/vue2-clock-picker
 ```
 
   - __In Browser:__
