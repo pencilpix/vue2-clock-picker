@@ -11,10 +11,24 @@
         </div>
         <div class="clock-picker__dialog-content">
           <transition name="scale" mode="out-in">
-            <clock-picker-hours :value="hours" @set="setHours($event)" v-if="!isHoursSet"></clock-picker-hours>
+            <clock-picker-hours
+                v-if="!isHoursSet"
+                :disabled-from="disabledHoursFrom"
+                :disabled-to="disabledHoursTo"
+                :value="hours"
+                @set="setHours($event)">
+            </clock-picker-hours>
           </transition>
           <transition name="scale" mode="out-in">
-            <clock-picker-minutes :value="minutes" @set="setMinutes($event)" v-if="isHoursSet"></clock-picker-minutes>
+            <clock-picker-minutes
+                v-if="isHoursSet"
+                :should-disable-all="isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom"
+                :should-disable-from="isHoursSet && hours === disabledHoursFrom"
+                :disabled-from="disabledMinutesFrom"
+                :disabled-to="disabledMinutesTo"
+                :value="minutes"
+                @set="setMinutes($event)">
+            </clock-picker-minutes>
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
@@ -34,6 +48,11 @@ import ClockPickerMinutes from './ClockPickerMinutes.vue';
 export default {
   name: 'ClockPickerDialog',
 
+  props: {
+    disabledFrom: { type: String, default: null },
+    disabledTo: { type: String, default: null },
+  },
+
   components: {
     ClockPickerHours,
     ClockPickerMinutes,
@@ -47,6 +66,42 @@ export default {
       isHoursSet: false,
       isMinutesSet: false,
     };
+  },
+
+  computed: {
+    disabledHoursFrom() {
+      const { disabledFrom } = this;
+      if (disabledFrom) {
+        return disabledFrom.slice(0, 2);
+      }
+      return null;
+    },
+
+    disabledMinutesFrom() {
+      const { disabledFrom } = this;
+      if (disabledFrom) {
+        return disabledFrom.slice(3);
+      }
+
+      return null;
+    },
+
+    disabledHoursTo() {
+      const { disabledTo } = this;
+      if (disabledTo) {
+        return disabledTo.slice(0, 2);
+      }
+      return null;
+    },
+
+    disabledMinutesTo() {
+      const { disabledTo } = this;
+      if (disabledTo) {
+        return disabledTo.slice(3);
+      }
+
+      return null;
+    },
   },
 
 
@@ -178,6 +233,17 @@ export default {
     font-weight: 500
     line-height: 32px
     display: inline-block
+    cursor: pointer
+
+    &:hover
+      background-color: $gray-light
+
+    &:focus
+      background-color: darken($gray-light, 3%)
+
+    &:active
+      background-color: darken($gray-light, 6%)
+
 
   .scale-enter-active,
   .scale-leave-active,

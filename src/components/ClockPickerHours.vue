@@ -6,6 +6,7 @@
           :key="item"
           :class="['pm__item--' + itemClass(item), item === value ? 'pm__item--selected' : '']">
         <button type="button" class="clock-picker__button"
+            :disabled="isDisabled(item)"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}
@@ -19,6 +20,7 @@
           :key="item"
           :class="'am__item--' + itemClass(item)">
         <button type="button" class="clock-picker__button"
+            :disabled="isDisabled(item)"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}
@@ -35,6 +37,8 @@ export default {
 
   props: {
     value: { type: String, default: '00' },
+    disabledFrom: { type: String, default: null },
+    disabledTo: { type: String, default: null },
   },
 
   data() {
@@ -45,18 +49,73 @@ export default {
 
 
   computed: {
+    /**
+     * pm hours from 13 to 00
+     * @return {Array<String>} in format HH
+     */
     pm() {
-      return ['13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '00'];
+      return this.makeArray(13, 24);
     },
 
+    /**
+     * am hours from 00 to 12
+     * @return {Array<String>} in format HH
+     */
     am() {
-      return ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+      return this.makeArray(1, 12);
+    },
+
+    /**
+     * return an array of hours should be disabled
+     * @return {Array<String>} in format HH or empty [].
+     */
+    disabledRange() {
+      const { disabledFrom, disabledTo } = this;
+
+      if (disabledFrom === disabledTo) {
+        return [];
+      }
+
+      if (disabledFrom && disabledTo) {
+        return this.makeArray(Number(disabledFrom) + 1, Number(disabledTo) - 1);
+      } else if (disabledFrom) {
+        return this.makeArray(Number(disabledFrom) + 1, 23);
+      } else if (disabledTo && disabledTo > 0) {
+        return this.makeArray(0, Number(disabledTo) - 1);
+      }
+      return [];
     },
   },
 
 
 
   methods: {
+    /**
+     * make an array of strings that represents from start
+     * to end number in format HH.
+     * @param {Number} from starting number
+     * @param {Number} to last number.
+     * @return {Array<String>} in format HH
+     */
+    makeArray(from, to) {
+      const items = [];
+      for (let i = from; i <= to; i++) { // eslint-disable-line
+        const str = `00${(i > 23) ? 0 : i}`;
+        items.push(str.slice(str.length - 2));
+      }
+      return items;
+    },
+
+    /**
+     * check if item should be disabled or not
+     * @param {String} item in format HH
+     * @return {Boolean}
+     */
+    isDisabled(item) {
+      return this.disabledRange.includes(item);
+    },
+
+
     /**
      * get a class number modifier
      * from the hour.

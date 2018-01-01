@@ -22,6 +22,8 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
+          :disabled-from="disabledFrom"
+          :disabled-to="disabledTo"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -53,6 +55,8 @@ export default {
     label: { type: String, default: '' },
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
+    disabledFrom: { type: String, default: null },
+    disabledTo: { type: String, default: null },
   },
 
   components: {
@@ -183,7 +187,8 @@ export default {
     margin: 0
     cursor: pointer
     color: $gray
-
+    font-weight: 500
+    font-size: 13px
 
     &:hover
       background-color: $gray-light
@@ -201,5 +206,18 @@ export default {
       &:focus
         background-color: $primary
         color: $white
+
+    &[disabled]
+      opacity: .4 !important
+      cursor: default
+      &,
+      &:active,
+      &:hover,
+      &:focus
+        background-color: $gray-light
+        color: $gray
+
+
+
 </style>
 
