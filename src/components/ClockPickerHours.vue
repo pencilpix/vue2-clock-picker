@@ -57,6 +57,12 @@ export default {
 
 
   methods: {
+    /**
+     * get a class number modifier
+     * from the hour.
+     * @param {String} str hour
+     * @return {Number} [0 - 11] to use as modifier for item.
+     */
     itemClass(str) {
       const no = Number(str);
 
@@ -68,6 +74,10 @@ export default {
       return no;
     },
 
+    /**
+     * emit value to the parent component
+     * @param {String} value hour as string HH
+     */
     setValue(value) {
       this.$emit('set', value);
     },

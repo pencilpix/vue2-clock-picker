@@ -36,6 +36,10 @@ export default {
 
 
   computed: {
+    /**
+     * get array of minutes.
+     * @return {Array} [0 - 59]
+     */
     minutes() {
       const items = [];
       for (let i = 0; i < 60; i++) { // eslint-disable-line
@@ -50,15 +54,23 @@ export default {
 
 
   methods: {
+    /**
+     * check wheither the item be small or not
+     * @param {String} item minute as MM
+     */
     isSmall(item) {
       return Number(item) % 5 !== 0;
     },
 
+    /**
+     * emit the choosen minute
+     * to the parent component
+     * with event 'set'.
+     */
     setValue(value) {
       this.$emit('set', value);
     },
   },
-
 };
 </script>
 

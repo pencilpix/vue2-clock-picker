@@ -78,6 +78,9 @@ export default {
 
 
   methods: {
+    /**
+     * open the dialog of clockpicker
+     */
     open() {
       this.emitEvent('beforeOpen');
       this.$refs.dialog.open();
@@ -86,6 +89,9 @@ export default {
       });
     },
 
+    /**
+     * close the dialog of clockpicker
+     */
     close() {
       this.emitEvent('beforeClose');
       this.$refs.dialog.close();
@@ -95,11 +101,19 @@ export default {
       });
     },
 
+    /**
+     * emit cancel and close.
+     * @param {String} time value at the cancel time.
+     */
     cancel(time) {
       this.emitEvent('cancel', time);
       this.close();
     },
 
+    /**
+     * handle set time and check validation
+     * @param {String} time in format HH:MM
+     */
     handleDone(time) {
       this.inputValue = time;
       this.hasValue = true;
@@ -108,24 +122,43 @@ export default {
       this.close();
     },
 
+    /**
+     * @param {String} name event.
+     * @param {any} value data to be recieved by listener
+     */
     emitEvent(name, value) {
       this.$emit(name, value);
     },
 
+    /**
+     * get current value
+     * @return {String} current input value in format `HH:MM`.
+     */
     getValue() {
       return this.inputValue;
     },
 
+    /**
+     * set value to dedicated time
+     * @param {String} time matches `HH:MM`.
+     */
     setValue(time) {
       this.handleDone(time);
     },
 
-
+    /**
+     * check the current input value
+     * is match pattern `HH:MM` or not
+     * @return {Boolean}
+     */
     isValid() {
       const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
       return pattern.test(this.inputValue);
     },
 
+    /**
+     * validate the current value of input
+     */
     validate() {
       this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
       this.isTouched = true;

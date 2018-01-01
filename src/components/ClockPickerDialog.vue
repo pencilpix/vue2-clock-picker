@@ -50,36 +50,53 @@ export default {
   },
 
 
-  computed: {
-  },
-
-
-
   methods: {
+    /**
+     * open the dialog
+     */
     open() {
       this.opened = true;
     },
 
+    /**
+     * close the dialog
+     * and reset indicators.
+     */
     close() {
       this.opened = false;
       this.isHoursSet = false;
       this.isMinutesSet = false;
     },
 
+    /**
+     * emit cancel to parent component with the current value.
+     */
     cancel() {
       this.$emit('cancel', `${this.hours}:${this.minutes}`);
     },
 
+    /**
+     * set hours value
+     * @param {String} value as HH
+     */
     setHours(value) {
       this.hours = value;
       this.isHoursSet = true;
     },
 
+    /**
+     * set minutes value
+     * @param {String} as MM
+     */
     setMinutes(value) {
       this.minutes = value;
       this.isMinutesSet = true;
     },
 
+    /**
+     * emit done to the parent
+     * with value in format HH:MM
+     */
     done() {
       this.$emit('done', `${this.hours}:${this.minutes}`);
     },
