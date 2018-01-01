@@ -7,7 +7,7 @@
           [inputErrorClass]: hasError && isTouched,
           [inputFocusClass]: isFocused,
         }">
-      <label for="clock_picker_input" v-if="label">{{label}}</label>
+      <label for="clock_picker_input" v-if="label">{{ label }}</label>
       <input
           type="text"
           id="clock_picker_input"
@@ -22,6 +22,7 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
+          :initial-value="inputValue || '00:00'"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           @cancel="cancel($event)"
@@ -41,6 +42,7 @@ const classes = {
   input: 'clock-picker__input',
 };
 
+
 export default {
   name: 'VueClockPicker',
 
@@ -59,9 +61,13 @@ export default {
     disabledTo: { type: String, default: null },
   },
 
+
+
   components: {
     ClockPickerDialog,
   },
+
+
 
   data() {
     return {
@@ -74,11 +80,18 @@ export default {
     };
   },
 
+
+
   computed: {
+    /**
+     * check if has error
+     */
     hasError() {
+      this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
       return this.showError;
     },
   },
+
 
 
   methods: {
@@ -93,6 +106,7 @@ export default {
       });
     },
 
+
     /**
      * close the dialog of clockpicker
      */
@@ -105,6 +119,7 @@ export default {
       });
     },
 
+
     /**
      * emit cancel and close.
      * @param {String} time value at the cancel time.
@@ -113,6 +128,7 @@ export default {
       this.emitEvent('cancel', time);
       this.close();
     },
+
 
     /**
      * handle set time and check validation
@@ -126,6 +142,7 @@ export default {
       this.close();
     },
 
+
     /**
      * @param {String} name event.
      * @param {any} value data to be recieved by listener
@@ -133,6 +150,7 @@ export default {
     emitEvent(name, value) {
       this.$emit(name, value);
     },
+
 
     /**
      * get current value
@@ -142,6 +160,7 @@ export default {
       return this.inputValue;
     },
 
+
     /**
      * set value to dedicated time
      * @param {String} time matches `HH:MM`.
@@ -149,6 +168,7 @@ export default {
     setValue(time) {
       this.handleDone(time);
     },
+
 
     /**
      * check the current input value
@@ -159,6 +179,7 @@ export default {
       const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
       return pattern.test(this.inputValue);
     },
+
 
     /**
      * validate the current value of input

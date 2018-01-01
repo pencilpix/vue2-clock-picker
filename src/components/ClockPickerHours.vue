@@ -41,6 +41,8 @@ export default {
     disabledTo: { type: String, default: null },
   },
 
+
+
   data() {
     return {
     };
@@ -57,6 +59,7 @@ export default {
       return this.makeArray(13, 24);
     },
 
+
     /**
      * am hours from 00 to 12
      * @return {Array<String>} in format HH
@@ -64,6 +67,7 @@ export default {
     am() {
       return this.makeArray(1, 12);
     },
+
 
     /**
      * return an array of hours should be disabled
@@ -106,6 +110,7 @@ export default {
       return items;
     },
 
+
     /**
      * check if item should be disabled or not
      * @param {String} item in format HH
@@ -132,6 +137,7 @@ export default {
       }
       return no;
     },
+
 
     /**
      * emit value to the parent component

@@ -22,8 +22,8 @@
           <transition name="scale" mode="out-in">
             <clock-picker-minutes
                 v-if="isHoursSet"
-                :should-disable-all="isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom"
-                :should-disable-from="isHoursSet && hours === disabledHoursFrom"
+                :should-disable-all="shouldDisableAllMinutes"
+                :should-disable-from="shouldDisableFrom"
                 :disabled-from="disabledMinutesFrom"
                 :disabled-to="disabledMinutesTo"
                 :value="minutes"
@@ -32,8 +32,12 @@
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
-          <button type="button" class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
-          <button type="button" class="clock-picker__dialog-action" @click="done">DONE</button>
+          <button type="button" class="clock-picker__dialog-action"
+              @click="cancel">CANCEL</button>
+
+          <button type="button" class="clock-picker__dialog-action"
+              :disabled="!isHoursSet || !isMinutesSet"
+              @click="done">DONE</button>
         </div>
       </div>
     </transition>
@@ -51,24 +55,35 @@ export default {
   props: {
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
+    initialValue: { type: String, default: '00:00' },
   },
+
+
 
   components: {
     ClockPickerHours,
     ClockPickerMinutes,
   },
 
+
+
   data() {
     return {
       opened: false,
-      hours: '00',
-      minutes: '00',
+      hours: this.initialValue.slice(0, 2),
+      minutes: this.initialValue.slice(3),
       isHoursSet: false,
       isMinutesSet: false,
     };
   },
 
+
+
   computed: {
+    /**
+     * get the hour should start disable from
+     * @return {String} in format HH
+     */
     disabledHoursFrom() {
       const { disabledFrom } = this;
       if (disabledFrom) {
@@ -77,6 +92,11 @@ export default {
       return null;
     },
 
+
+    /**
+     * get the minutes should start disable from
+     * @return {String} in format MM
+     */
     disabledMinutesFrom() {
       const { disabledFrom } = this;
       if (disabledFrom) {
@@ -86,6 +106,11 @@ export default {
       return null;
     },
 
+
+    /**
+     * get the hours should start disable to
+     * @return {String} in format HH
+     */
     disabledHoursTo() {
       const { disabledTo } = this;
       if (disabledTo) {
@@ -94,15 +119,42 @@ export default {
       return null;
     },
 
+
+    /**
+     * get the minutes should start disable to
+     * @return {String} in format MM
+     */
     disabledMinutesTo() {
-      const { disabledTo } = this;
-      if (disabledTo) {
+      const { disabledTo, isHoursSet, disabledHoursTo, hours } = this;
+
+      if (disabledTo && !(isHoursSet && hours !== disabledHoursTo)) {
         return disabledTo.slice(3);
       }
 
       return null;
     },
+
+
+    /**
+     * check if should disable all minutes for selected hour or not
+     * @return {Boolean}
+     */
+    shouldDisableAllMinutes() {
+      const { isHoursSet, hours, disabledHoursTo, disabledHoursFrom } = this;
+      return isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom;
+    },
+
+
+    /**
+     * check if should start disable from/to
+     * @return {Boolean}
+     */
+    shouldDisableFrom() {
+      const { isHoursSet, hours, disabledHoursFrom } = this;
+      return isHoursSet && hours === disabledHoursFrom;
+    },
   },
+
 
 
   methods: {
@@ -112,6 +164,7 @@ export default {
     open() {
       this.opened = true;
     },
+
 
     /**
      * close the dialog
@@ -123,12 +176,16 @@ export default {
       this.isMinutesSet = false;
     },
 
+
     /**
      * emit cancel to parent component with the current value.
      */
     cancel() {
       this.$emit('cancel', `${this.hours}:${this.minutes}`);
+      this.hours = this.initialValue.slice(0, 2);
+      this.minutes = this.initialValue.slice(3);
     },
+
 
     /**
      * set hours value
@@ -139,6 +196,7 @@ export default {
       this.isHoursSet = true;
     },
 
+
     /**
      * set minutes value
      * @param {String} as MM
@@ -147,6 +205,7 @@ export default {
       this.minutes = value;
       this.isMinutesSet = true;
     },
+
 
     /**
      * emit done to the parent
