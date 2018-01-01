@@ -4,6 +4,7 @@ A simple clock picker component for `vue v2.x`.
 
 
 ![Screenshot](./screenshot.png)
+![Screenshot2](./screenshot2.png)
 
 ### Installation
 
