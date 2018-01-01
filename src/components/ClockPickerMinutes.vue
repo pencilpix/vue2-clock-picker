@@ -34,6 +34,8 @@ export default {
     disabledTo: { type: String, default: null },
   },
 
+
+
   data() {
     return {};
   },
@@ -48,6 +50,7 @@ export default {
     minutes() {
       return this.makeArray(0, 59);
     },
+
 
     /**
      * return an array of hours should be disabled
@@ -85,6 +88,7 @@ export default {
       return items;
     },
 
+
     /**
      * check if item should be disabled or not
      * @param {String} item in format MM
@@ -94,6 +98,7 @@ export default {
       return this.disabledRange.includes(item);
     },
 
+
     /**
      * check wheither the item be small or not
      * @param {String} item minute as MM
@@ -101,6 +106,7 @@ export default {
     isSmall(item) {
       return Number(item) % 5 !== 0;
     },
+
 
     /**
      * emit the choosen minute
