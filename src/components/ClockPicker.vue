@@ -76,6 +76,9 @@ export default {
   },
 
   computed: {
+    /**
+     * check if has error
+     */
     hasError() {
       this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
       return this.showError;

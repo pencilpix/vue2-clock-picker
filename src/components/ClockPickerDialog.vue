@@ -74,6 +74,10 @@ export default {
   },
 
   computed: {
+    /**
+     * get the hour should start disable from
+     * @return {String} in format HH
+     */
     disabledHoursFrom() {
       const { disabledFrom } = this;
       if (disabledFrom) {
@@ -82,6 +86,10 @@ export default {
       return null;
     },
 
+    /**
+     * get the minutes should start disable from
+     * @return {String} in format MM
+     */
     disabledMinutesFrom() {
       const { disabledFrom } = this;
       if (disabledFrom) {
@@ -91,6 +99,10 @@ export default {
       return null;
     },
 
+    /**
+     * get the hours should start disable to
+     * @return {String} in format HH
+     */
     disabledHoursTo() {
       const { disabledTo } = this;
       if (disabledTo) {
@@ -99,6 +111,10 @@ export default {
       return null;
     },
 
+    /**
+     * get the minutes should start disable to
+     * @return {String} in format MM
+     */
     disabledMinutesTo() {
       const { disabledTo, isHoursSet, disabledHoursTo, hours } = this;
 
@@ -109,11 +125,19 @@ export default {
       return null;
     },
 
+    /**
+     * check if should disable all minutes for selected hour or not
+     * @return {Boolean}
+     */
     shouldDisableAllMinutes() {
       const { isHoursSet, hours, disabledHoursTo, disabledHoursFrom } = this;
       return isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom;
     },
 
+    /**
+     * check if should start disable from/to
+     * @return {Boolean}
+     */
     shouldDisableFrom() {
       const { isHoursSet, hours, disabledHoursFrom } = this;
       return isHoursSet && hours === disabledHoursFrom;
