@@ -19,7 +19,7 @@ $ yarn add @pencilpix/vue2-clock-picker
   - __In Browser:__
 
     ```html
-    <link href="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css"></link>
+    <link href="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css"/>
 
 
     <script src="node_modules/vuejs/dist/vue.min.js"></script>
@@ -28,7 +28,8 @@ $ yarn add @pencilpix/vue2-clock-picker
 
   - __Module:__
       ```js
-      import VueClockPicker from 'vue2-clock-picker';
+      import VueClockPicker from '@pencilpix/vue2-clock-picker';
+      import '@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css';
       ```
 
 
@@ -80,4 +81,5 @@ open       | open the dialog
 close      | close the dialog
 getValue   | return the current value of the input as `02:00`
 setValue   | set the current value of input and it accept `String` with valid time `HH:MM`
+validate   | check for errors. it can be used just before submit the form.
 
