@@ -11,6 +11,8 @@
   margin: 0;
   cursor: pointer;
   color: #757575;
+  font-weight: 500;
+  font-size: 13px;
 }
 .clock-picker__button:hover {
     background-color: #f5f5f5;
@@ -24,6 +26,14 @@
 .clock-picker__button--active, .clock-picker__button--active:active, .clock-picker__button--active:hover, .clock-picker__button--active:focus {
     background-color: #a48bd1;
     color: #fff;
+}
+.clock-picker__button[disabled] {
+    opacity: .4 !important;
+    cursor: default;
+}
+.clock-picker__button[disabled], .clock-picker__button[disabled]:active, .clock-picker__button[disabled]:hover, .clock-picker__button[disabled]:focus {
+      background-color: #f5f5f5;
+      color: #757575;
 }
 
 .clock-picker__dialog {
@@ -94,6 +104,16 @@
     font-weight: 500;
     line-height: 32px;
     display: inline-block;
+    cursor: pointer;
+}
+.clock-picker__dialog-action:hover {
+      background-color: #f5f5f5;
+}
+.clock-picker__dialog-action:focus {
+      background-color: #ededed;
+}
+.clock-picker__dialog-action:active {
+      background-color: #e6e6e6;
 }
 .clock-picker__dialog .scale-enter-active,
   .clock-picker__dialog .scale-leave-active,
