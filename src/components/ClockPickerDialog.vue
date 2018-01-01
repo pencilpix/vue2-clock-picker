@@ -55,7 +55,7 @@ export default {
   props: {
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
-    initialValue: { type: String, default: `00:00` },
+    initialValue: { type: String, default: '00:00' },
   },
 
 
