@@ -7,7 +7,7 @@
           [inputErrorClass]: hasError && isTouched,
           [inputFocusClass]: isFocused,
         }">
-      <label for="clock_picker_input" v-if="label">{{label}}</label>
+      <label for="clock_picker_input" v-if="label">{{ label }}</label>
       <input
           type="text"
           id="clock_picker_input"
@@ -22,6 +22,7 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
+          :initial-value="inputValue || '00:00'"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           @cancel="cancel($event)"
@@ -76,6 +77,7 @@ export default {
 
   computed: {
     hasError() {
+      this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
       return this.showError;
     },
   },

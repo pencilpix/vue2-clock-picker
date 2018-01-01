@@ -22,8 +22,8 @@
           <transition name="scale" mode="out-in">
             <clock-picker-minutes
                 v-if="isHoursSet"
-                :should-disable-all="isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom"
-                :should-disable-from="isHoursSet && hours === disabledHoursFrom"
+                :should-disable-all="shouldDisableAllMinutes"
+                :should-disable-from="shouldDisableFrom"
                 :disabled-from="disabledMinutesFrom"
                 :disabled-to="disabledMinutesTo"
                 :value="minutes"
@@ -32,8 +32,12 @@
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
-          <button type="button" class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
-          <button type="button" class="clock-picker__dialog-action" @click="done">DONE</button>
+          <button type="button" class="clock-picker__dialog-action"
+              @click="cancel">CANCEL</button>
+
+          <button type="button" class="clock-picker__dialog-action"
+              :disabled="!isHoursSet || !isMinutesSet"
+              @click="done">DONE</button>
         </div>
       </div>
     </transition>
@@ -51,6 +55,7 @@ export default {
   props: {
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
+    initialValue: { type: String, default: `00:00` },
   },
 
   components: {
@@ -61,8 +66,8 @@ export default {
   data() {
     return {
       opened: false,
-      hours: '00',
-      minutes: '00',
+      hours: this.initialValue.slice(0, 2),
+      minutes: this.initialValue.slice(3),
       isHoursSet: false,
       isMinutesSet: false,
     };
@@ -95,12 +100,23 @@ export default {
     },
 
     disabledMinutesTo() {
-      const { disabledTo } = this;
-      if (disabledTo) {
+      const { disabledTo, isHoursSet, disabledHoursTo, hours } = this;
+
+      if (disabledTo && !(isHoursSet && hours !== disabledHoursTo)) {
         return disabledTo.slice(3);
       }
 
       return null;
+    },
+
+    shouldDisableAllMinutes() {
+      const { isHoursSet, hours, disabledHoursTo, disabledHoursFrom } = this;
+      return isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom;
+    },
+
+    shouldDisableFrom() {
+      const { isHoursSet, hours, disabledHoursFrom } = this;
+      return isHoursSet && hours === disabledHoursFrom;
     },
   },
 
@@ -128,6 +144,8 @@ export default {
      */
     cancel() {
       this.$emit('cancel', `${this.hours}:${this.minutes}`);
+      this.hours = this.initialValue.slice(0, 2);
+      this.minutes = this.initialValue.slice(3);
     },
 
     /**
