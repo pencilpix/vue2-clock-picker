@@ -58,10 +58,14 @@ export default {
     initialValue: { type: String, default: `00:00` },
   },
 
+
+
   components: {
     ClockPickerHours,
     ClockPickerMinutes,
   },
+
+
 
   data() {
     return {
@@ -72,6 +76,8 @@ export default {
       isMinutesSet: false,
     };
   },
+
+
 
   computed: {
     /**
@@ -86,6 +92,7 @@ export default {
       return null;
     },
 
+
     /**
      * get the minutes should start disable from
      * @return {String} in format MM
@@ -99,6 +106,7 @@ export default {
       return null;
     },
 
+
     /**
      * get the hours should start disable to
      * @return {String} in format HH
@@ -110,6 +118,7 @@ export default {
       }
       return null;
     },
+
 
     /**
      * get the minutes should start disable to
@@ -125,6 +134,7 @@ export default {
       return null;
     },
 
+
     /**
      * check if should disable all minutes for selected hour or not
      * @return {Boolean}
@@ -133,6 +143,7 @@ export default {
       const { isHoursSet, hours, disabledHoursTo, disabledHoursFrom } = this;
       return isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom;
     },
+
 
     /**
      * check if should start disable from/to
@@ -145,6 +156,7 @@ export default {
   },
 
 
+
   methods: {
     /**
      * open the dialog
@@ -152,6 +164,7 @@ export default {
     open() {
       this.opened = true;
     },
+
 
     /**
      * close the dialog
@@ -163,6 +176,7 @@ export default {
       this.isMinutesSet = false;
     },
 
+
     /**
      * emit cancel to parent component with the current value.
      */
@@ -171,6 +185,7 @@ export default {
       this.hours = this.initialValue.slice(0, 2);
       this.minutes = this.initialValue.slice(3);
     },
+
 
     /**
      * set hours value
@@ -181,6 +196,7 @@ export default {
       this.isHoursSet = true;
     },
 
+
     /**
      * set minutes value
      * @param {String} as MM
@@ -189,6 +205,7 @@ export default {
       this.minutes = value;
       this.isMinutesSet = true;
     },
+
 
     /**
      * emit done to the parent
