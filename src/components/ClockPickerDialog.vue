@@ -11,15 +11,29 @@
         </div>
         <div class="clock-picker__dialog-content">
           <transition name="scale" mode="out-in">
-            <clock-picker-hours :value="hours" @set="setHours($event)" v-if="!isHoursSet"></clock-picker-hours>
+            <clock-picker-hours
+                v-if="!isHoursSet"
+                :disabled-from="disabledHoursFrom"
+                :disabled-to="disabledHoursTo"
+                :value="hours"
+                @set="setHours($event)">
+            </clock-picker-hours>
           </transition>
           <transition name="scale" mode="out-in">
-            <clock-picker-minutes :value="minutes" @set="setMinutes($event)" v-if="isHoursSet"></clock-picker-minutes>
+            <clock-picker-minutes
+                v-if="isHoursSet"
+                :should-disable-all="isHoursSet && hours < disabledHoursTo && hours > disabledHoursFrom"
+                :should-disable-from="isHoursSet && hours === disabledHoursFrom"
+                :disabled-from="disabledMinutesFrom"
+                :disabled-to="disabledMinutesTo"
+                :value="minutes"
+                @set="setMinutes($event)">
+            </clock-picker-minutes>
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
-          <button class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
-          <button class="clock-picker__dialog-action" @click="done">DONE</button>
+          <button type="button" class="clock-picker__dialog-action" @click="cancel">CANCEL</button>
+          <button type="button" class="clock-picker__dialog-action" @click="done">DONE</button>
         </div>
       </div>
     </transition>
@@ -33,6 +47,11 @@ import ClockPickerMinutes from './ClockPickerMinutes.vue';
 
 export default {
   name: 'ClockPickerDialog',
+
+  props: {
+    disabledFrom: { type: String, default: null },
+    disabledTo: { type: String, default: null },
+  },
 
   components: {
     ClockPickerHours,
@@ -49,37 +68,90 @@ export default {
     };
   },
 
-
   computed: {
+    disabledHoursFrom() {
+      const { disabledFrom } = this;
+      if (disabledFrom) {
+        return disabledFrom.slice(0, 2);
+      }
+      return null;
+    },
+
+    disabledMinutesFrom() {
+      const { disabledFrom } = this;
+      if (disabledFrom) {
+        return disabledFrom.slice(3);
+      }
+
+      return null;
+    },
+
+    disabledHoursTo() {
+      const { disabledTo } = this;
+      if (disabledTo) {
+        return disabledTo.slice(0, 2);
+      }
+      return null;
+    },
+
+    disabledMinutesTo() {
+      const { disabledTo } = this;
+      if (disabledTo) {
+        return disabledTo.slice(3);
+      }
+
+      return null;
+    },
   },
 
 
-
   methods: {
+    /**
+     * open the dialog
+     */
     open() {
       this.opened = true;
     },
 
+    /**
+     * close the dialog
+     * and reset indicators.
+     */
     close() {
       this.opened = false;
       this.isHoursSet = false;
       this.isMinutesSet = false;
     },
 
+    /**
+     * emit cancel to parent component with the current value.
+     */
     cancel() {
       this.$emit('cancel', `${this.hours}:${this.minutes}`);
     },
 
+    /**
+     * set hours value
+     * @param {String} value as HH
+     */
     setHours(value) {
       this.hours = value;
       this.isHoursSet = true;
     },
 
+    /**
+     * set minutes value
+     * @param {String} as MM
+     */
     setMinutes(value) {
       this.minutes = value;
       this.isMinutesSet = true;
     },
 
+    /**
+     * emit done to the parent
+     * with value in format HH:MM
+     */
     done() {
       this.$emit('done', `${this.hours}:${this.minutes}`);
     },
@@ -161,6 +233,17 @@ export default {
     font-weight: 500
     line-height: 32px
     display: inline-block
+    cursor: pointer
+
+    &:hover
+      background-color: $gray-light
+
+    &:focus
+      background-color: darken($gray-light, 3%)
+
+    &:active
+      background-color: darken($gray-light, 6%)
+
 
   .scale-enter-active,
   .scale-leave-active,

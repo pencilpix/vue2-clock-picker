@@ -9,7 +9,8 @@
             'minutes__item--small': isSmall(item),
             'minutes__item--selected': item === value,
           }">
-        <button class="clock-picker__button"
+        <button type="button" class="clock-picker__button"
+            :disabled="isDisabled(item) || shouldDisableAll"
             :class="{'clock-picker__button--active': item === value}"
             @click="setValue(item)">
           {{ item }}
@@ -27,6 +28,10 @@ export default {
   props: {
     buttonClass: { type: String },
     value: { type: String },
+    shouldDisableAll: { type: Boolean, default: false },
+    shouldDisableFrom: { type: Boolean, default: false },
+    disabledFrom: { type: String, default: null },
+    disabledTo: { type: String, default: null },
   },
 
   data() {
@@ -36,29 +41,76 @@ export default {
 
 
   computed: {
+    /**
+     * get array of minutes.
+     * @return {Array} [0 - 59]
+     */
     minutes() {
-      const items = [];
-      for (let i = 0; i < 60; i++) { // eslint-disable-line
-        const str = `00${i}`;
-        items.push(str.slice(str.length - 2));
+      return this.makeArray(0, 59);
+    },
+
+    /**
+     * return an array of hours should be disabled
+     * @return {Array<String>} in format MM or empty [].
+     */
+    disabledRange() {
+      const { disabledFrom, disabledTo, shouldDisableFrom } = this;
+
+      if (shouldDisableFrom && disabledFrom) {
+        return this.makeArray(disabledFrom, 59);
+      } else if (disabledTo) {
+        return this.makeArray(0, disabledTo);
       }
 
-      return items;
+      return [];
     },
   },
 
 
 
   methods: {
+    /**
+     * make an array of strings that represents from start
+     * to end number in format MM.
+     * @param {Number} from starting number
+     * @param {Number} to last number.
+     * @return {Array<String>} in format MM
+     */
+    makeArray(from, to) {
+      const items = [];
+      for (let i = from; i <= to; i++) { // eslint-disable-line
+        const str = `00${i}`;
+        items.push(str.slice(str.length - 2));
+      }
+      return items;
+    },
+
+    /**
+     * check if item should be disabled or not
+     * @param {String} item in format MM
+     * @return {Boolean}
+     */
+    isDisabled(item) {
+      return this.disabledRange.includes(item);
+    },
+
+    /**
+     * check wheither the item be small or not
+     * @param {String} item minute as MM
+     */
     isSmall(item) {
       return Number(item) % 5 !== 0;
     },
 
+    /**
+     * emit the choosen minute
+     * to the parent component
+     * with event 'set'.
+     */
     setValue(value) {
       this.$emit('set', value);
     },
   },
-
 };
 </script>
 
