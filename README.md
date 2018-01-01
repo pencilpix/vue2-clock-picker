@@ -56,6 +56,8 @@ input-focus-class | `String` | css custom class to be applied to input container
 input-error-class | `String` | css custom class to be applied to input container when the value not match `HH:MM` or the input is required and the value is empty.
 value                 | `String` | initial value of input. default `''`
 required              | `Boolean` | set it to true if time field is required. default `false`
+disabled-from         | `String` | value of time to disable from until `disabled-to` value or to the end. default `null`.
+disabled-to           | `String` | value of time to disable from `disabled-to` time value or from 00:00 to, default `null`.
 
 
 
