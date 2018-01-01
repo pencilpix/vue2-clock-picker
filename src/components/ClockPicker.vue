@@ -1,13 +1,19 @@
 <template>
   <div class="clock-picker">
-    <div :class="classes.container">
+    <div
+        :class="{
+          [inputContainerClass]: true,
+          [inputValueClass]: hasValue,
+          [inputErrorClass]: hasError && isTouched,
+          [inputFocusClass]: isFocused,
+        }">
       <label for="clock_picker_input" v-if="label">{{label}}</label>
       <input
           type="text"
           id="clock_picker_input"
           :name="name"
           :placeholder="placeholder"
-          :class="classes.input"
+          :class="inputClass"
           v-model="inputValue"
           readonly
           ref="input"
@@ -37,21 +43,16 @@ export default {
   name: 'VueClockPicker',
 
   props: {
-    inputContainerClass: { type: String },
-    inputClass: { type: String },
-    inputFocusClass: { type: String },
-    inputErrorClass: { type: String },
-    inputValueClass: { type: String },
-    placeholder: { type: String },
-    name: { type: String },
-    label: { type: String },
+    inputContainerClass: { type: String, default: classes.container },
+    inputClass: { type: String, default: classes.input },
+    inputFocusClass: { type: String, default: classes.focus },
+    inputErrorClass: { type: String, default: classes.error },
+    inputValueClass: { type: String, default: classes.value },
+    placeholder: { type: String, default: '' },
+    name: { type: String, default: 'time_input' },
+    label: { type: String, default: '' },
     required: { type: Boolean, default: false },
-    value: {
-      validator(inputValue) {
-        const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-        return pattern.test(inputValue);
-      },
-    },
+    value: { type: String, default: '' },
   },
 
   components: {
@@ -64,33 +65,14 @@ export default {
       hasValue: !!this.value,
       dialogOpen: false,
       inputValue: this.value,
+      showError: (this.inputValue && !this.isValid()) || (this.required && !this.inputValue),
+      isTouched: false,
     };
   },
 
   computed: {
-    classes() {
-      const { inputContainerClass, inputFocusClass, inputValueClass } = this;
-      const { inputClass, inputErrorClass } = this;
-      const { container, input, focus, value, error } = classes;
-
-      return {
-        container: {
-          [inputContainerClass || container]: true,
-          [inputFocusClass || focus]: this.isFocused,
-          [inputValueClass || value]: this.hasValue,
-          [inputErrorClass || error]: this.hasError,
-        },
-
-        input: {
-          [inputClass || input]: true,
-        },
-      };
-    },
-
     hasError() {
-      if (this.required && !this.inputValue) return true;
-      if (!this.isValid()) return true;
-      return false;
+      return this.showError;
     },
   },
 
@@ -109,6 +91,7 @@ export default {
       this.$refs.dialog.close();
       this.$nextTick(() => {
         this.emitEvent('close');
+        this.isTouched = true;
       });
     },
 
@@ -120,6 +103,7 @@ export default {
     handleDone(time) {
       this.inputValue = time;
       this.hasValue = true;
+      this.validate();
       this.$emit('timeset', time);
       this.close();
     },
@@ -133,13 +117,18 @@ export default {
     },
 
     setValue(time) {
-      this.inputValue = time;
-      this.hasValue = true;
+      this.handleDone(time);
     },
+
 
     isValid() {
       const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
       return pattern.test(this.inputValue);
+    },
+
+    validate() {
+      this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
+      this.isTouched = true;
     },
   },
 };
