@@ -212,6 +212,21 @@ export default {
 @import '~theme/theme'
 
 .clock-picker
+  &__input
+    border: 1px solid darken($gray-light, 10%)
+
+  &__input--error
+    &,
+    &.clock-picker__input--has-value
+      color: #F44336
+
+      .clock-picker__input
+        border-color: #F44336
+
+  &__input--has-value
+    .clock-picker__input
+      border-color: #00E676
+
   &__button
     background: none
     width: 24px
