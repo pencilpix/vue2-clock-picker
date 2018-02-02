@@ -66,12 +66,19 @@ export default {
   },
 
 
+  watch: {
+    initialValue() {
+      this.updateTime();
+    },
+  },
+
+
 
   data() {
     return {
       opened: false,
       hours: this.initialValue.slice(0, 2),
-      minutes: this.initialValue.slice(3),
+      minutes: this.initialValue.slice(3, 5),
       isHoursSet: false,
       isMinutesSet: false,
     };
@@ -100,7 +107,7 @@ export default {
     disabledMinutesFrom() {
       const { disabledFrom } = this;
       if (disabledFrom) {
-        return disabledFrom.slice(3);
+        return disabledFrom.slice(3, 5);
       }
 
       return null;
@@ -213,6 +220,11 @@ export default {
      */
     done() {
       this.$emit('done', `${this.hours}:${this.minutes}`);
+    },
+
+    updateTime() {
+      this.hours = this.initialValue.slice(0, 2);
+      this.minutes = this.initialValue.slice(3, 5);
     },
   },
 };

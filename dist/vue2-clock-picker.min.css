@@ -1,4 +1,16 @@
 
+.clock-picker__input {
+  border: 1px solid gainsboro;
+}
+.clock-picker__input--error, .clock-picker__input--error.clock-picker__input--has-value {
+  color: #F44336;
+}
+.clock-picker__input--error .clock-picker__input, .clock-picker__input--error.clock-picker__input--has-value .clock-picker__input {
+    border-color: #F44336;
+}
+.clock-picker__input--has-value .clock-picker__input {
+  border-color: #00E676;
+}
 .clock-picker__button {
   background: none;
   width: 24px;
