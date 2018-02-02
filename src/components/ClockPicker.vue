@@ -18,7 +18,7 @@
           readonly
           ref="input"
           @click="open">
-      <slot name="error"></slot>
+      <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
     </div>
 
     <clock-picker-dialog ref="dialog"
@@ -72,12 +72,19 @@ export default {
   data() {
     return {
       isFocused: false,
-      hasValue: !!this.value,
       dialogOpen: false,
       inputValue: this.value,
       showError: (this.inputValue && !this.isValid()) || (this.required && !this.inputValue),
       isTouched: false,
     };
+  },
+
+
+
+  watch: {
+    value() {
+      this.setValue(this.value);
+    },
   },
 
 
@@ -89,6 +96,10 @@ export default {
     hasError() {
       this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
       return this.showError;
+    },
+
+    hasValue() {
+      return !!this.inputValue;
     },
   },
 
@@ -136,7 +147,6 @@ export default {
      */
     handleDone(time) {
       this.inputValue = time;
-      this.hasValue = true;
       this.validate();
       this.$emit('timeset', time);
       this.close();
@@ -189,6 +199,12 @@ export default {
       this.isTouched = true;
     },
   },
+
+  mounted() {
+    if (this.value) {
+      this.validate();
+    }
+  },
 };
 </script>
 
@@ -196,6 +212,21 @@ export default {
 @import '~theme/theme'
 
 .clock-picker
+  &__input
+    border: 1px solid darken($gray-light, 10%)
+
+  &__input--error
+    &,
+    &.clock-picker__input--has-value
+      color: #F44336
+
+      .clock-picker__input
+        border-color: #F44336
+
+  &__input--has-value
+    .clock-picker__input
+      border-color: #00E676
+
   &__button
     background: none
     width: 24px
