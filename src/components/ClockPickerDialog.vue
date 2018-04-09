@@ -36,7 +36,7 @@
               @click="cancel">CANCEL</button>
 
           <button type="button" class="clock-picker__dialog-action"
-              :disabled="!isHoursSet || !isMinutesSet"
+              :disabled="isDoneDisabled"
               @click="done">DONE</button>
         </div>
       </div>
@@ -160,6 +160,17 @@ export default {
       const { isHoursSet, hours, disabledHoursFrom } = this;
       return isHoursSet && hours === disabledHoursFrom;
     },
+
+
+    /**
+     * check if the done button should be disabled or not
+     * @return {Boolean}
+     */
+    isDoneDisabled() {
+      const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+      const time = `${this.hours}:${this.minutes}`;
+      return !pattern.test(time);
+    },
   },
 
 
@@ -226,6 +237,12 @@ export default {
       this.hours = this.initialValue.slice(0, 2);
       this.minutes = this.initialValue.slice(3, 5);
     },
+  },
+
+
+
+  mounted() {
+    this.updateTime();
   },
 };
 </script>

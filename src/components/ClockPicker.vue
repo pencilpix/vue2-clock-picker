@@ -22,7 +22,7 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
-          :initial-value="inputValue || '00:00'"
+          :initial-value="inputValue || '--:--'"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           @cancel="cancel($event)"
