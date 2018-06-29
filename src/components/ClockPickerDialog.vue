@@ -33,11 +33,11 @@
         </div>
         <div class="clock-picker__dialog-actions">
           <button type="button" class="clock-picker__dialog-action"
-              @click="cancel">CANCEL</button>
+              @click="cancel">{{ cancelText }}</button>
 
           <button type="button" class="clock-picker__dialog-action"
               :disabled="isDoneDisabled"
-              @click="done">DONE</button>
+              @click="done">{{ doneText }}</button>
         </div>
       </div>
     </transition>
@@ -56,6 +56,8 @@ export default {
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
     initialValue: { type: String, default: '00:00' },
+    cancelText: { type: String, default: null },
+    doneText: { type: String, default: null },
   },
 
 

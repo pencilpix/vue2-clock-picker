@@ -7,10 +7,10 @@
           [inputErrorClass]: hasError && isTouched,
           [inputFocusClass]: isFocused,
         }">
-      <label for="clock_picker_input" v-if="label">{{ label }}</label>
+      <label :for="id" v-if="label">{{ label }}</label>
       <input
           type="text"
-          id="clock_picker_input"
+          :id="id"
           :name="name"
           :placeholder="placeholder"
           :class="inputClass"
@@ -25,6 +25,8 @@
           :initial-value="inputValue || '--:--'"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
+          :done-text="doneText"
+          :cancel-text="cancelText"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -55,10 +57,13 @@ export default {
     placeholder: { type: String, default: '' },
     name: { type: String, default: 'time_input' },
     label: { type: String, default: '' },
+    id: { type: String, default: 'clock_picker_input'},
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
+    doneText: { type: String, default: 'done' },
+    cancelText: { type: String, default: 'cancel' },
   },
 
 
