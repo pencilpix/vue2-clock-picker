@@ -47,6 +47,7 @@ once component is installed it can be used as:
 
 prop           | type         | default
 ---------------|--------------|-------------
+id             | `String`     | input id and label for value. default `clock_picker_input`
 placeholder    | `String`     | input placeholder default `''`
 name           | `String`     | input name default `''`
 label          | `String`     | label text will be hidden if not set. default `''`
@@ -59,6 +60,8 @@ value                 | `String` | initial value of input. default `''`
 required              | `Boolean` | set it to true if time field is required. default `false`
 disabled-from         | `String` | value of time to disable from until `disabled-to` value or to the end. default `null`.
 disabled-to           | `String` | value of time to disable from `disabled-to` time value or from 00:00 to, default `null`.
+done-text             | `String` | done button text, default `done`
+cancel-text           | `String` | cancel button text, default `cancel`
 
 
 
