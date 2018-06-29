@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../dist/vue2-clock-picker.min.css">
+</head>
+<body>
+  <div id="app">
+    <vue-clock-picker label="time 1" id="clock-picker-1" done-text="ok" cancel-text="close"></vue-clock-picker>
+    <vue-clock-picker label="time 2" id="clock-picker-2"></vue-clock-picker>
+  </div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+  <script src="../dist/vue2-clock-picker.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>
