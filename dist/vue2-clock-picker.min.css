@@ -74,7 +74,8 @@
     margin: -180px -160px;
     background-color: #fff;
     z-index: 201;
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
     border-radius: 5px;
     overflow: auto;
 }
@@ -100,8 +101,13 @@
       position: absolute;
 }
 .clock-picker__dialog-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     border-top: 1px solid #f5f5f5;
     padding: .5rem;
 }
@@ -111,7 +117,9 @@
     background: transparent;
     border: 0;
     color: #a48bd1;
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     font-size: 16px;
     font-weight: 500;
     line-height: 32px;
@@ -136,7 +144,8 @@
 .clock-picker__dialog .scale-enter,
   .clock-picker__dialog .scale-leave-active {
     opacity: 0;
-    transform: scale(0);
+    -webkit-transform: scale(0);
+            transform: scale(0);
 }
 .clock-picker__dialog .fade-enter,
   .clock-picker__dialog .fade-leave-active {
@@ -156,40 +165,52 @@
     top: 50%;
 }
 .pm .pm__item.pm__item--0 {
-      transform: rotate(-90deg) translate(120px) rotate(90deg);
+      -webkit-transform: rotate(-90deg) translate(120px) rotate(90deg);
+              transform: rotate(-90deg) translate(120px) rotate(90deg);
 }
 .pm .pm__item.pm__item--1 {
-      transform: rotate(-60deg) translate(120px) rotate(60deg);
+      -webkit-transform: rotate(-60deg) translate(120px) rotate(60deg);
+              transform: rotate(-60deg) translate(120px) rotate(60deg);
 }
 .pm .pm__item.pm__item--2 {
-      transform: rotate(-30deg) translate(120px) rotate(30deg);
+      -webkit-transform: rotate(-30deg) translate(120px) rotate(30deg);
+              transform: rotate(-30deg) translate(120px) rotate(30deg);
 }
 .pm .pm__item.pm__item--3 {
-      transform: rotate(0deg) translate(120px) rotate(0deg);
+      -webkit-transform: rotate(0deg) translate(120px) rotate(0deg);
+              transform: rotate(0deg) translate(120px) rotate(0deg);
 }
 .pm .pm__item.pm__item--4 {
-      transform: rotate(30deg) translate(120px) rotate(-30deg);
+      -webkit-transform: rotate(30deg) translate(120px) rotate(-30deg);
+              transform: rotate(30deg) translate(120px) rotate(-30deg);
 }
 .pm .pm__item.pm__item--5 {
-      transform: rotate(60deg) translate(120px) rotate(-60deg);
+      -webkit-transform: rotate(60deg) translate(120px) rotate(-60deg);
+              transform: rotate(60deg) translate(120px) rotate(-60deg);
 }
 .pm .pm__item.pm__item--6 {
-      transform: rotate(90deg) translate(120px) rotate(-90deg);
+      -webkit-transform: rotate(90deg) translate(120px) rotate(-90deg);
+              transform: rotate(90deg) translate(120px) rotate(-90deg);
 }
 .pm .pm__item.pm__item--7 {
-      transform: rotate(120deg) translate(120px) rotate(-120deg);
+      -webkit-transform: rotate(120deg) translate(120px) rotate(-120deg);
+              transform: rotate(120deg) translate(120px) rotate(-120deg);
 }
 .pm .pm__item.pm__item--8 {
-      transform: rotate(150deg) translate(120px) rotate(-150deg);
+      -webkit-transform: rotate(150deg) translate(120px) rotate(-150deg);
+              transform: rotate(150deg) translate(120px) rotate(-150deg);
 }
 .pm .pm__item.pm__item--9 {
-      transform: rotate(180deg) translate(120px) rotate(-180deg);
+      -webkit-transform: rotate(180deg) translate(120px) rotate(-180deg);
+              transform: rotate(180deg) translate(120px) rotate(-180deg);
 }
 .pm .pm__item.pm__item--10 {
-      transform: rotate(210deg) translate(120px) rotate(-210deg);
+      -webkit-transform: rotate(210deg) translate(120px) rotate(-210deg);
+              transform: rotate(210deg) translate(120px) rotate(-210deg);
 }
 .pm .pm__item.pm__item--11 {
-      transform: rotate(240deg) translate(120px) rotate(-240deg);
+      -webkit-transform: rotate(240deg) translate(120px) rotate(-240deg);
+              transform: rotate(240deg) translate(120px) rotate(-240deg);
 }
 .am {
   border-radius: 50%;
@@ -204,40 +225,52 @@
     top: 50%;
 }
 .am .am__item.am__item--0 {
-      transform: rotate(-90deg) translate(95px) rotate(90deg);
+      -webkit-transform: rotate(-90deg) translate(95px) rotate(90deg);
+              transform: rotate(-90deg) translate(95px) rotate(90deg);
 }
 .am .am__item.am__item--1 {
-      transform: rotate(-60deg) translate(95px) rotate(60deg);
+      -webkit-transform: rotate(-60deg) translate(95px) rotate(60deg);
+              transform: rotate(-60deg) translate(95px) rotate(60deg);
 }
 .am .am__item.am__item--2 {
-      transform: rotate(-30deg) translate(95px) rotate(30deg);
+      -webkit-transform: rotate(-30deg) translate(95px) rotate(30deg);
+              transform: rotate(-30deg) translate(95px) rotate(30deg);
 }
 .am .am__item.am__item--3 {
-      transform: rotate(0deg) translate(95px) rotate(0deg);
+      -webkit-transform: rotate(0deg) translate(95px) rotate(0deg);
+              transform: rotate(0deg) translate(95px) rotate(0deg);
 }
 .am .am__item.am__item--4 {
-      transform: rotate(30deg) translate(95px) rotate(-30deg);
+      -webkit-transform: rotate(30deg) translate(95px) rotate(-30deg);
+              transform: rotate(30deg) translate(95px) rotate(-30deg);
 }
 .am .am__item.am__item--5 {
-      transform: rotate(60deg) translate(95px) rotate(-60deg);
+      -webkit-transform: rotate(60deg) translate(95px) rotate(-60deg);
+              transform: rotate(60deg) translate(95px) rotate(-60deg);
 }
 .am .am__item.am__item--6 {
-      transform: rotate(90deg) translate(95px) rotate(-90deg);
+      -webkit-transform: rotate(90deg) translate(95px) rotate(-90deg);
+              transform: rotate(90deg) translate(95px) rotate(-90deg);
 }
 .am .am__item.am__item--7 {
-      transform: rotate(120deg) translate(95px) rotate(-120deg);
+      -webkit-transform: rotate(120deg) translate(95px) rotate(-120deg);
+              transform: rotate(120deg) translate(95px) rotate(-120deg);
 }
 .am .am__item.am__item--8 {
-      transform: rotate(150deg) translate(95px) rotate(-150deg);
+      -webkit-transform: rotate(150deg) translate(95px) rotate(-150deg);
+              transform: rotate(150deg) translate(95px) rotate(-150deg);
 }
 .am .am__item.am__item--9 {
-      transform: rotate(180deg) translate(95px) rotate(-180deg);
+      -webkit-transform: rotate(180deg) translate(95px) rotate(-180deg);
+              transform: rotate(180deg) translate(95px) rotate(-180deg);
 }
 .am .am__item.am__item--10 {
-      transform: rotate(210deg) translate(95px) rotate(-210deg);
+      -webkit-transform: rotate(210deg) translate(95px) rotate(-210deg);
+              transform: rotate(210deg) translate(95px) rotate(-210deg);
 }
 .am .am__item.am__item--11 {
-      transform: rotate(240deg) translate(95px) rotate(-240deg);
+      -webkit-transform: rotate(240deg) translate(95px) rotate(-240deg);
+              transform: rotate(240deg) translate(95px) rotate(-240deg);
 }
 .clock-picker__hours {
   position: relative;
@@ -268,184 +301,244 @@
     top: 50%;
 }
 .minutes .minutes__item.minutes__item--0 {
-      transform: rotate(-90deg) translate(120px) rotate(90deg);
+      -webkit-transform: rotate(-90deg) translate(120px) rotate(90deg);
+              transform: rotate(-90deg) translate(120px) rotate(90deg);
 }
 .minutes .minutes__item.minutes__item--1 {
-      transform: rotate(-84deg) translate(120px) rotate(84deg);
+      -webkit-transform: rotate(-84deg) translate(120px) rotate(84deg);
+              transform: rotate(-84deg) translate(120px) rotate(84deg);
 }
 .minutes .minutes__item.minutes__item--2 {
-      transform: rotate(-78deg) translate(120px) rotate(78deg);
+      -webkit-transform: rotate(-78deg) translate(120px) rotate(78deg);
+              transform: rotate(-78deg) translate(120px) rotate(78deg);
 }
 .minutes .minutes__item.minutes__item--3 {
-      transform: rotate(-72deg) translate(120px) rotate(72deg);
+      -webkit-transform: rotate(-72deg) translate(120px) rotate(72deg);
+              transform: rotate(-72deg) translate(120px) rotate(72deg);
 }
 .minutes .minutes__item.minutes__item--4 {
-      transform: rotate(-66deg) translate(120px) rotate(66deg);
+      -webkit-transform: rotate(-66deg) translate(120px) rotate(66deg);
+              transform: rotate(-66deg) translate(120px) rotate(66deg);
 }
 .minutes .minutes__item.minutes__item--5 {
-      transform: rotate(-60deg) translate(120px) rotate(60deg);
+      -webkit-transform: rotate(-60deg) translate(120px) rotate(60deg);
+              transform: rotate(-60deg) translate(120px) rotate(60deg);
 }
 .minutes .minutes__item.minutes__item--6 {
-      transform: rotate(-54deg) translate(120px) rotate(54deg);
+      -webkit-transform: rotate(-54deg) translate(120px) rotate(54deg);
+              transform: rotate(-54deg) translate(120px) rotate(54deg);
 }
 .minutes .minutes__item.minutes__item--7 {
-      transform: rotate(-48deg) translate(120px) rotate(48deg);
+      -webkit-transform: rotate(-48deg) translate(120px) rotate(48deg);
+              transform: rotate(-48deg) translate(120px) rotate(48deg);
 }
 .minutes .minutes__item.minutes__item--8 {
-      transform: rotate(-42deg) translate(120px) rotate(42deg);
+      -webkit-transform: rotate(-42deg) translate(120px) rotate(42deg);
+              transform: rotate(-42deg) translate(120px) rotate(42deg);
 }
 .minutes .minutes__item.minutes__item--9 {
-      transform: rotate(-36deg) translate(120px) rotate(36deg);
+      -webkit-transform: rotate(-36deg) translate(120px) rotate(36deg);
+              transform: rotate(-36deg) translate(120px) rotate(36deg);
 }
 .minutes .minutes__item.minutes__item--10 {
-      transform: rotate(-30deg) translate(120px) rotate(30deg);
+      -webkit-transform: rotate(-30deg) translate(120px) rotate(30deg);
+              transform: rotate(-30deg) translate(120px) rotate(30deg);
 }
 .minutes .minutes__item.minutes__item--11 {
-      transform: rotate(-24deg) translate(120px) rotate(24deg);
+      -webkit-transform: rotate(-24deg) translate(120px) rotate(24deg);
+              transform: rotate(-24deg) translate(120px) rotate(24deg);
 }
 .minutes .minutes__item.minutes__item--12 {
-      transform: rotate(-18deg) translate(120px) rotate(18deg);
+      -webkit-transform: rotate(-18deg) translate(120px) rotate(18deg);
+              transform: rotate(-18deg) translate(120px) rotate(18deg);
 }
 .minutes .minutes__item.minutes__item--13 {
-      transform: rotate(-12deg) translate(120px) rotate(12deg);
+      -webkit-transform: rotate(-12deg) translate(120px) rotate(12deg);
+              transform: rotate(-12deg) translate(120px) rotate(12deg);
 }
 .minutes .minutes__item.minutes__item--14 {
-      transform: rotate(-6deg) translate(120px) rotate(6deg);
+      -webkit-transform: rotate(-6deg) translate(120px) rotate(6deg);
+              transform: rotate(-6deg) translate(120px) rotate(6deg);
 }
 .minutes .minutes__item.minutes__item--15 {
-      transform: rotate(0deg) translate(120px) rotate(0deg);
+      -webkit-transform: rotate(0deg) translate(120px) rotate(0deg);
+              transform: rotate(0deg) translate(120px) rotate(0deg);
 }
 .minutes .minutes__item.minutes__item--16 {
-      transform: rotate(6deg) translate(120px) rotate(-6deg);
+      -webkit-transform: rotate(6deg) translate(120px) rotate(-6deg);
+              transform: rotate(6deg) translate(120px) rotate(-6deg);
 }
 .minutes .minutes__item.minutes__item--17 {
-      transform: rotate(12deg) translate(120px) rotate(-12deg);
+      -webkit-transform: rotate(12deg) translate(120px) rotate(-12deg);
+              transform: rotate(12deg) translate(120px) rotate(-12deg);
 }
 .minutes .minutes__item.minutes__item--18 {
-      transform: rotate(18deg) translate(120px) rotate(-18deg);
+      -webkit-transform: rotate(18deg) translate(120px) rotate(-18deg);
+              transform: rotate(18deg) translate(120px) rotate(-18deg);
 }
 .minutes .minutes__item.minutes__item--19 {
-      transform: rotate(24deg) translate(120px) rotate(-24deg);
+      -webkit-transform: rotate(24deg) translate(120px) rotate(-24deg);
+              transform: rotate(24deg) translate(120px) rotate(-24deg);
 }
 .minutes .minutes__item.minutes__item--20 {
-      transform: rotate(30deg) translate(120px) rotate(-30deg);
+      -webkit-transform: rotate(30deg) translate(120px) rotate(-30deg);
+              transform: rotate(30deg) translate(120px) rotate(-30deg);
 }
 .minutes .minutes__item.minutes__item--21 {
-      transform: rotate(36deg) translate(120px) rotate(-36deg);
+      -webkit-transform: rotate(36deg) translate(120px) rotate(-36deg);
+              transform: rotate(36deg) translate(120px) rotate(-36deg);
 }
 .minutes .minutes__item.minutes__item--22 {
-      transform: rotate(42deg) translate(120px) rotate(-42deg);
+      -webkit-transform: rotate(42deg) translate(120px) rotate(-42deg);
+              transform: rotate(42deg) translate(120px) rotate(-42deg);
 }
 .minutes .minutes__item.minutes__item--23 {
-      transform: rotate(48deg) translate(120px) rotate(-48deg);
+      -webkit-transform: rotate(48deg) translate(120px) rotate(-48deg);
+              transform: rotate(48deg) translate(120px) rotate(-48deg);
 }
 .minutes .minutes__item.minutes__item--24 {
-      transform: rotate(54deg) translate(120px) rotate(-54deg);
+      -webkit-transform: rotate(54deg) translate(120px) rotate(-54deg);
+              transform: rotate(54deg) translate(120px) rotate(-54deg);
 }
 .minutes .minutes__item.minutes__item--25 {
-      transform: rotate(60deg) translate(120px) rotate(-60deg);
+      -webkit-transform: rotate(60deg) translate(120px) rotate(-60deg);
+              transform: rotate(60deg) translate(120px) rotate(-60deg);
 }
 .minutes .minutes__item.minutes__item--26 {
-      transform: rotate(66deg) translate(120px) rotate(-66deg);
+      -webkit-transform: rotate(66deg) translate(120px) rotate(-66deg);
+              transform: rotate(66deg) translate(120px) rotate(-66deg);
 }
 .minutes .minutes__item.minutes__item--27 {
-      transform: rotate(72deg) translate(120px) rotate(-72deg);
+      -webkit-transform: rotate(72deg) translate(120px) rotate(-72deg);
+              transform: rotate(72deg) translate(120px) rotate(-72deg);
 }
 .minutes .minutes__item.minutes__item--28 {
-      transform: rotate(78deg) translate(120px) rotate(-78deg);
+      -webkit-transform: rotate(78deg) translate(120px) rotate(-78deg);
+              transform: rotate(78deg) translate(120px) rotate(-78deg);
 }
 .minutes .minutes__item.minutes__item--29 {
-      transform: rotate(84deg) translate(120px) rotate(-84deg);
+      -webkit-transform: rotate(84deg) translate(120px) rotate(-84deg);
+              transform: rotate(84deg) translate(120px) rotate(-84deg);
 }
 .minutes .minutes__item.minutes__item--30 {
-      transform: rotate(90deg) translate(120px) rotate(-90deg);
+      -webkit-transform: rotate(90deg) translate(120px) rotate(-90deg);
+              transform: rotate(90deg) translate(120px) rotate(-90deg);
 }
 .minutes .minutes__item.minutes__item--31 {
-      transform: rotate(96deg) translate(120px) rotate(-96deg);
+      -webkit-transform: rotate(96deg) translate(120px) rotate(-96deg);
+              transform: rotate(96deg) translate(120px) rotate(-96deg);
 }
 .minutes .minutes__item.minutes__item--32 {
-      transform: rotate(102deg) translate(120px) rotate(-102deg);
+      -webkit-transform: rotate(102deg) translate(120px) rotate(-102deg);
+              transform: rotate(102deg) translate(120px) rotate(-102deg);
 }
 .minutes .minutes__item.minutes__item--33 {
-      transform: rotate(108deg) translate(120px) rotate(-108deg);
+      -webkit-transform: rotate(108deg) translate(120px) rotate(-108deg);
+              transform: rotate(108deg) translate(120px) rotate(-108deg);
 }
 .minutes .minutes__item.minutes__item--34 {
-      transform: rotate(114deg) translate(120px) rotate(-114deg);
+      -webkit-transform: rotate(114deg) translate(120px) rotate(-114deg);
+              transform: rotate(114deg) translate(120px) rotate(-114deg);
 }
 .minutes .minutes__item.minutes__item--35 {
-      transform: rotate(120deg) translate(120px) rotate(-120deg);
+      -webkit-transform: rotate(120deg) translate(120px) rotate(-120deg);
+              transform: rotate(120deg) translate(120px) rotate(-120deg);
 }
 .minutes .minutes__item.minutes__item--36 {
-      transform: rotate(126deg) translate(120px) rotate(-126deg);
+      -webkit-transform: rotate(126deg) translate(120px) rotate(-126deg);
+              transform: rotate(126deg) translate(120px) rotate(-126deg);
 }
 .minutes .minutes__item.minutes__item--37 {
-      transform: rotate(132deg) translate(120px) rotate(-132deg);
+      -webkit-transform: rotate(132deg) translate(120px) rotate(-132deg);
+              transform: rotate(132deg) translate(120px) rotate(-132deg);
 }
 .minutes .minutes__item.minutes__item--38 {
-      transform: rotate(138deg) translate(120px) rotate(-138deg);
+      -webkit-transform: rotate(138deg) translate(120px) rotate(-138deg);
+              transform: rotate(138deg) translate(120px) rotate(-138deg);
 }
 .minutes .minutes__item.minutes__item--39 {
-      transform: rotate(144deg) translate(120px) rotate(-144deg);
+      -webkit-transform: rotate(144deg) translate(120px) rotate(-144deg);
+              transform: rotate(144deg) translate(120px) rotate(-144deg);
 }
 .minutes .minutes__item.minutes__item--40 {
-      transform: rotate(150deg) translate(120px) rotate(-150deg);
+      -webkit-transform: rotate(150deg) translate(120px) rotate(-150deg);
+              transform: rotate(150deg) translate(120px) rotate(-150deg);
 }
 .minutes .minutes__item.minutes__item--41 {
-      transform: rotate(156deg) translate(120px) rotate(-156deg);
+      -webkit-transform: rotate(156deg) translate(120px) rotate(-156deg);
+              transform: rotate(156deg) translate(120px) rotate(-156deg);
 }
 .minutes .minutes__item.minutes__item--42 {
-      transform: rotate(162deg) translate(120px) rotate(-162deg);
+      -webkit-transform: rotate(162deg) translate(120px) rotate(-162deg);
+              transform: rotate(162deg) translate(120px) rotate(-162deg);
 }
 .minutes .minutes__item.minutes__item--43 {
-      transform: rotate(168deg) translate(120px) rotate(-168deg);
+      -webkit-transform: rotate(168deg) translate(120px) rotate(-168deg);
+              transform: rotate(168deg) translate(120px) rotate(-168deg);
 }
 .minutes .minutes__item.minutes__item--44 {
-      transform: rotate(174deg) translate(120px) rotate(-174deg);
+      -webkit-transform: rotate(174deg) translate(120px) rotate(-174deg);
+              transform: rotate(174deg) translate(120px) rotate(-174deg);
 }
 .minutes .minutes__item.minutes__item--45 {
-      transform: rotate(180deg) translate(120px) rotate(-180deg);
+      -webkit-transform: rotate(180deg) translate(120px) rotate(-180deg);
+              transform: rotate(180deg) translate(120px) rotate(-180deg);
 }
 .minutes .minutes__item.minutes__item--46 {
-      transform: rotate(186deg) translate(120px) rotate(-186deg);
+      -webkit-transform: rotate(186deg) translate(120px) rotate(-186deg);
+              transform: rotate(186deg) translate(120px) rotate(-186deg);
 }
 .minutes .minutes__item.minutes__item--47 {
-      transform: rotate(192deg) translate(120px) rotate(-192deg);
+      -webkit-transform: rotate(192deg) translate(120px) rotate(-192deg);
+              transform: rotate(192deg) translate(120px) rotate(-192deg);
 }
 .minutes .minutes__item.minutes__item--48 {
-      transform: rotate(198deg) translate(120px) rotate(-198deg);
+      -webkit-transform: rotate(198deg) translate(120px) rotate(-198deg);
+              transform: rotate(198deg) translate(120px) rotate(-198deg);
 }
 .minutes .minutes__item.minutes__item--49 {
-      transform: rotate(204deg) translate(120px) rotate(-204deg);
+      -webkit-transform: rotate(204deg) translate(120px) rotate(-204deg);
+              transform: rotate(204deg) translate(120px) rotate(-204deg);
 }
 .minutes .minutes__item.minutes__item--50 {
-      transform: rotate(210deg) translate(120px) rotate(-210deg);
+      -webkit-transform: rotate(210deg) translate(120px) rotate(-210deg);
+              transform: rotate(210deg) translate(120px) rotate(-210deg);
 }
 .minutes .minutes__item.minutes__item--51 {
-      transform: rotate(216deg) translate(120px) rotate(-216deg);
+      -webkit-transform: rotate(216deg) translate(120px) rotate(-216deg);
+              transform: rotate(216deg) translate(120px) rotate(-216deg);
 }
 .minutes .minutes__item.minutes__item--52 {
-      transform: rotate(222deg) translate(120px) rotate(-222deg);
+      -webkit-transform: rotate(222deg) translate(120px) rotate(-222deg);
+              transform: rotate(222deg) translate(120px) rotate(-222deg);
 }
 .minutes .minutes__item.minutes__item--53 {
-      transform: rotate(228deg) translate(120px) rotate(-228deg);
+      -webkit-transform: rotate(228deg) translate(120px) rotate(-228deg);
+              transform: rotate(228deg) translate(120px) rotate(-228deg);
 }
 .minutes .minutes__item.minutes__item--54 {
-      transform: rotate(234deg) translate(120px) rotate(-234deg);
+      -webkit-transform: rotate(234deg) translate(120px) rotate(-234deg);
+              transform: rotate(234deg) translate(120px) rotate(-234deg);
 }
 .minutes .minutes__item.minutes__item--55 {
-      transform: rotate(240deg) translate(120px) rotate(-240deg);
+      -webkit-transform: rotate(240deg) translate(120px) rotate(-240deg);
+              transform: rotate(240deg) translate(120px) rotate(-240deg);
 }
 .minutes .minutes__item.minutes__item--56 {
-      transform: rotate(246deg) translate(120px) rotate(-246deg);
+      -webkit-transform: rotate(246deg) translate(120px) rotate(-246deg);
+              transform: rotate(246deg) translate(120px) rotate(-246deg);
 }
 .minutes .minutes__item.minutes__item--57 {
-      transform: rotate(252deg) translate(120px) rotate(-252deg);
+      -webkit-transform: rotate(252deg) translate(120px) rotate(-252deg);
+              transform: rotate(252deg) translate(120px) rotate(-252deg);
 }
 .minutes .minutes__item.minutes__item--58 {
-      transform: rotate(258deg) translate(120px) rotate(-258deg);
+      -webkit-transform: rotate(258deg) translate(120px) rotate(-258deg);
+              transform: rotate(258deg) translate(120px) rotate(-258deg);
 }
 .minutes .minutes__item.minutes__item--59 {
-      transform: rotate(264deg) translate(120px) rotate(-264deg);
+      -webkit-transform: rotate(264deg) translate(120px) rotate(-264deg);
+              transform: rotate(264deg) translate(120px) rotate(-264deg);
 }
 .clock-picker__minutes {
   position: relative;
