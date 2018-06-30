@@ -37,11 +37,17 @@
 import ClockPickerDialog from './ClockPickerDialog.vue';
 
 
+/**
+ * generate randomly unique id
+ * via random number and date
+ * @return {String} unique id
+ */
 const ID = () => {
   const random = Math.random().toString(36).substring(2, 9);
   const now = Date.now().toString(36);
   return `clock_picker_input_${now + random}`;
 };
+
 
 const classes = {
   container: 'clock-picker__input-container',
