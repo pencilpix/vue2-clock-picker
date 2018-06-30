@@ -7,7 +7,7 @@
           [inputErrorClass]: hasError && isTouched,
           [inputFocusClass]: isFocused,
         }">
-      <label :for="uuid" v-if="label">{{ label }}</label>
+      <label :for="uuid" v-if="label" :class="labelClass">{{ label }}</label>
       <input
           type="text"
           :id="uuid"
@@ -49,6 +49,7 @@ const classes = {
   error: 'clock-picker__input--error',
   value: 'clock-picker__input--has-value',
   input: 'clock-picker__input',
+  label: 'clock-picker__label',
 };
 
 
@@ -61,6 +62,7 @@ export default {
     inputFocusClass: { type: String, default: classes.focus },
     inputErrorClass: { type: String, default: classes.error },
     inputValueClass: { type: String, default: classes.value },
+    labelClass: { type: String, default: classes.label },
     placeholder: { type: String, default: '' },
     name: { type: String, default: 'time_input' },
     label: { type: String, default: '' },
