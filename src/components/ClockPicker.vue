@@ -7,10 +7,10 @@
           [inputErrorClass]: hasError && isTouched,
           [inputFocusClass]: isFocused,
         }">
-      <label :for="id" v-if="label">{{ label }}</label>
+      <label :for="uuid" v-if="label" :class="labelClass">{{ label }}</label>
       <input
           type="text"
-          :id="id"
+          :id="uuid"
           :name="name"
           :placeholder="placeholder"
           :class="inputClass"
@@ -36,12 +36,26 @@
 <script>
 import ClockPickerDialog from './ClockPickerDialog.vue';
 
+
+/**
+ * generate randomly unique id
+ * via random number and date
+ * @return {String} unique id
+ */
+const ID = () => {
+  const random = Math.random().toString(36).substring(2, 9);
+  const now = Date.now().toString(36);
+  return `clock_picker_input_${now + random}`;
+};
+
+
 const classes = {
   container: 'clock-picker__input-container',
   focus: 'clock-picker__input--focused',
   error: 'clock-picker__input--error',
   value: 'clock-picker__input--has-value',
   input: 'clock-picker__input',
+  label: 'clock-picker__label',
 };
 
 
@@ -54,10 +68,11 @@ export default {
     inputFocusClass: { type: String, default: classes.focus },
     inputErrorClass: { type: String, default: classes.error },
     inputValueClass: { type: String, default: classes.value },
+    labelClass: { type: String, default: classes.label },
     placeholder: { type: String, default: '' },
     name: { type: String, default: 'time_input' },
     label: { type: String, default: '' },
-    id: { type: String, default: 'clock_picker_input'},
+    id: { type: String, default: null },
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
     disabledFrom: { type: String, default: null },
@@ -81,6 +96,7 @@ export default {
       inputValue: this.value,
       showError: (this.inputValue && !this.isValid()) || (this.required && !this.inputValue),
       isTouched: false,
+      uuid: this.id || ID(),
     };
   },
 

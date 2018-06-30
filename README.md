@@ -47,15 +47,16 @@ once component is installed it can be used as:
 
 prop           | type         | default
 ---------------|--------------|-------------
-id             | `String`     | input id and label for value. default `clock_picker_input`
+id             | `String`     | input id and label for value. default is randomly unique like: `clock_picker_input_jj17bvjklhwhxvm`
 placeholder    | `String`     | input placeholder default `''`
 name           | `String`     | input name default `''`
 label          | `String`     | label text will be hidden if not set. default `''`
-input-class    | `String`     | css custom class to be applied to input. default `''`.
-input-container-class | `String`| css custom class to be applied to input container.
-input-value-class | `String`| css custom class to be applied to input container when input contains value. default `''`.
-input-focus-class | `String` | css custom class to be applied to input container when the input is focused. default `''`.
-input-error-class | `String` | css custom class to be applied to input container when the value not match `HH:MM` or the input is required and the value is empty.
+input-class    | `String`     | css custom class to be applied to input. default `clock-picker__input`.
+input-container-class | `String`| css custom class to be applied to input container. default `clock-picker__input-container`.
+input-value-class | `String`| css custom class to be applied to input container when input contains value. default `clock-picker__input--has-value`.
+input-focus-class | `String` | css custom class to be applied to input container when the input is focused. default `clock-picker__input--focused`.
+input-error-class | `String` | css custom class to be applied to input container when the value not match `HH:MM` or the input is required and the value is empty. default `clock-picker__input--error`.
+label-class       | `String | custom class name of label. default: `clock-picker__label`
 value                 | `String` | initial value of input. default `''`
 required              | `Boolean` | set it to true if time field is required. default `false`
 disabled-from         | `String` | value of time to disable from until `disabled-to` value or to the end. default `null`.
