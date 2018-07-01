@@ -1,5 +1,5 @@
 <template>
-  <div class="clock-picker">
+  <div class="clock-picker" >
     <div
         :class="{
           [inputContainerClass]: true,
@@ -17,6 +17,7 @@
           v-model="inputValue"
           readonly
           ref="input"
+          @keydown="keydown($event)"
           @click="open">
       <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
     </div>
@@ -36,6 +37,7 @@
 <script>
 import ClockPickerDialog from './ClockPickerDialog.vue';
 
+// const { console } = window;
 
 /**
  * generate randomly unique id
@@ -127,6 +129,10 @@ export default {
 
 
   methods: {
+    x(a, e) {
+      // console.log(a, e);
+      this.$emit('xx1', { a, e });
+    },
     /**
      * open the dialog of clockpicker
      */
@@ -161,6 +167,14 @@ export default {
       this.close();
     },
 
+    /**
+     * bind Escape key to Cancel.
+     */
+    keydown(e) {
+      if (e.key === 'Escape') {
+        this.cancel();
+      }
+    },
 
     /**
      * handle set time and check validation

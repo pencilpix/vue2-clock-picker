@@ -1,5 +1,5 @@
 <template>
-  <div class="clock-picker__dialog" :class="{ 'clock-picker__dialog--active': opened }">
+  <div class="clock-picker__dialog" :class="{ 'clock-picker__dialog--active': opened }" >
     <transition name="fade" mode="out-in">
       <div class="clock-picker__dialog-drop" v-if="opened" @click="close"></div>
     </transition>
@@ -195,7 +195,6 @@ export default {
       this.isHoursSet = false;
       this.isMinutesSet = false;
     },
-
 
     /**
      * emit cancel to parent component with the current value.
