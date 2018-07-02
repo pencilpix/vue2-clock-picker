@@ -17,7 +17,6 @@
           v-model="inputValue"
           readonly
           ref="input"
-          @keydown="keydown($event)"
           @click="open">
       <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
     </div>
@@ -162,14 +161,6 @@ export default {
       this.close();
     },
 
-    /**
-     * bind Escape key to Cancel.
-     */
-    keydown(e) {
-      if (e.key === 'Escape') {
-        this.cancel();
-      }
-    },
 
     /**
      * handle set time and check validation
