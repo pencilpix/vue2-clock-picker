@@ -1,5 +1,5 @@
 <template>
-  <div class="clock-picker" >
+  <div class="clock-picker">
     <div
         :class="{
           [inputContainerClass]: true,
@@ -36,8 +36,6 @@
 
 <script>
 import ClockPickerDialog from './ClockPickerDialog.vue';
-
-// const { console } = window;
 
 /**
  * generate randomly unique id
@@ -129,10 +127,6 @@ export default {
 
 
   methods: {
-    x(a, e) {
-      // console.log(a, e);
-      this.$emit('xx1', { a, e });
-    },
     /**
      * open the dialog of clockpicker
      */
