@@ -22,11 +22,15 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
-          :initial-value="inputValue || '--:--'"
+          :initial-value="hasError || !inputValue ? '--:--' : inputValue"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           :done-text="doneText"
           :cancel-text="cancelText"
+          :color="color"
+          :disabled-color="disabledColor"
+          :active-color="activeColor"
+          :active-text-color="activeTextColor"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -75,10 +79,14 @@ export default {
     id: { type: String, default: null },
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
-    disabledFrom: { type: String, default: null },
-    disabledTo: { type: String, default: null },
+    disabledFrom: { type: String, default: '' },
+    disabledTo: { type: String, default: '' },
     doneText: { type: String, default: 'done' },
     cancelText: { type: String, default: 'cancel' },
+    activeColor: { type: String, default: '#a48bd1' },
+    activeTextColor: { type: String, default: 'white' },
+    color: { type: String, default: '#757575' },
+    disabledColor: { type: String, default: '#ddd' },
   },
 
 
@@ -94,7 +102,7 @@ export default {
       isFocused: false,
       dialogOpen: false,
       inputValue: this.value,
-      showError: (this.inputValue && !this.isValid()) || (this.required && !this.inputValue),
+      showError: false,
       isTouched: false,
       uuid: this.id || ID(),
     };
@@ -115,7 +123,7 @@ export default {
      * check if has error
      */
     hasError() {
-      this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
+      this.validate();
       return this.showError;
     },
 
@@ -213,10 +221,35 @@ export default {
 
 
     /**
+     * check if a value should be disabled
+     * @param {String} value hh:mm
+     * @return {Boolean}
+     */
+    isDisabled(value) {
+      const hS = Number(this.disabledFrom.slice(0, 2));
+      const hE = Number(this.disabledTo.slice(0, 2));
+      const mS = Number(this.disabledFrom.slice(3));
+      const mE = Number(this.disabledTo.slice(3));
+      const vH = Number(value.slice(0, 2));
+      const vM = Number(value.slice(3));
+
+      return (hS === hE && hS === vH && mS === 0 && mE === 59) ||
+        (hS === hE && hS === vH && vM >= mS && vM <= mE) ||
+        (hS < hE && vH === hS && mS <= vM) ||
+        (hS < hE && vH === hE && mE >= vM) ||
+        (hS < hE && vH > hS && vH < hE) ||
+        (hS > hE);
+    },
+
+
+    /**
      * validate the current value of input
      */
     validate() {
-      this.showError = (this.inputValue && !this.isValid()) || (this.required && !this.inputValue);
+      const required = this.required && !this.inputValue;
+      const notValid = this.inputValue && !this.isValid();
+      const disabled = this.inputValue && this.isDisabled(this.inputValue);
+      this.showError = required || notValid || disabled;
       this.isTouched = true;
     },
   },

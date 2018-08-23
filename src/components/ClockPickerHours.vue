@@ -1,37 +1,23 @@
 <template>
   <div class="clock-picker__hours">
-    <div class="pm">
-      <div class="pm__item"
-          v-for="item in pm"
-          :key="item"
-          :class="['pm__item--' + itemClass(item), item === value ? 'pm__item--selected' : '']">
-        <button type="button" class="clock-picker__button"
-            :disabled="isDisabled(item)"
-            :class="{'clock-picker__button--active': item === value}"
-            @click="setValue(item)">
-          {{ item }}
-        </button>
-      </div>
-    </div>
-
-    <div class="am">
-      <div class="am__item"
-          v-for="item in am"
-          :key="item"
-          :class="'am__item--' + itemClass(item)">
-        <button type="button" class="clock-picker__button"
-            :disabled="isDisabled(item)"
-            :class="{'clock-picker__button--active': item === value}"
-            @click="setValue(item)">
-          {{ item }}
-        </button>
-      </div>
-    </div>
+    <clock-picker-canvas
+        :width="280"
+        :disabled="disabledRange"
+        :default-value="value"
+        :color="color"
+        :disabled-color="disabledColor"
+        :active-color="activeColor"
+        :active-text-color="activeTextColor"
+        @set="setValue($event)">
+    </clock-picker-canvas>
   </div>
 </template>
 
 
 <script>
+import ClockPickerCanvas from './ClockPickerCanvas.vue';
+
+
 export default {
   name: 'ClockPickerHours',
 
@@ -39,6 +25,18 @@ export default {
     value: { type: String, default: '00' },
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
+    disabledMinsFrom: { type: String, default: null },
+    disabledMinsTo: { type: String, default: null },
+    activeColor: { type: String, default: 'black' },
+    activeTextColor: { type: String, default: 'white' },
+    color: { type: String, default: '#757575' },
+    disabledColor: { type: String, default: '#ddd' },
+  },
+
+
+
+  components: {
+    ClockPickerCanvas,
   },
 
 
@@ -52,41 +50,27 @@ export default {
 
   computed: {
     /**
-     * pm hours from 13 to 00
-     * @return {Array<String>} in format HH
-     */
-    pm() {
-      return this.makeArray(13, 24);
-    },
-
-
-    /**
-     * am hours from 00 to 12
-     * @return {Array<String>} in format HH
-     */
-    am() {
-      return this.makeArray(1, 12);
-    },
-
-
-    /**
      * return an array of hours should be disabled
      * @return {Array<String>} in format HH or empty [].
      */
     disabledRange() {
       const { disabledFrom, disabledTo } = this;
+      const { disabledMinsFrom, disabledMinsTo } = this;
+      const fromStart = disabledMinsFrom === '00' ? 0 : 1;
+      const tillEnd = disabledMinsTo === '59' ? 0 : 1;
 
       if (disabledFrom === disabledTo) {
         return [];
       }
 
       if (disabledFrom && disabledTo) {
-        return this.makeArray(Number(disabledFrom) + 1, Number(disabledTo) - 1);
+        return this.makeArray(Number(disabledFrom) + fromStart, Number(disabledTo) - tillEnd);
       } else if (disabledFrom) {
-        return this.makeArray(Number(disabledFrom) + 1, 23);
+        return this.makeArray(Number(disabledFrom) + fromStart, 23);
       } else if (disabledTo && disabledTo > 0) {
-        return this.makeArray(0, Number(disabledTo) - 1);
+        return this.makeArray(0, Number(disabledTo) - tillEnd);
       }
+
       return [];
     },
   },
@@ -153,25 +137,10 @@ export default {
 
 <style lang="sass">
 @import '~theme/theme'
-
-+place-on-circle(pm, item, 1, 12, 240px, 32px)
-+place-on-circle(am, item, 1, 12, 190px, 32px)
-
 .clock-picker
   &__hours
     position: relative
     width: 100%
-    height: 240px
-
-    .pm,
-    .am
-      position: absolute
-      top: 50%
-      left: 50%
-      margin: -95px
-
-    .pm
-      margin: -120px
-
+    height: 280px
 </style>
 
