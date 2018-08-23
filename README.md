@@ -61,8 +61,12 @@ value                 | `String` | initial value of input. default `''`
 required              | `Boolean` | set it to true if time field is required. default `false`
 disabled-from         | `String` | value of time to disable from until `disabled-to` value or to the end. default `null`.
 disabled-to           | `String` | value of time to disable from `disabled-to` time value or from 00:00 to, default `null`.
-done-text             | `String` | done button text, default `done`
-cancel-text           | `String` | cancel button text, default `cancel`
+done-text             | `String` | done button text, default `done`.
+cancel-text           | `String` | cancel button text, default `cancel`.
+active-color          | `String` | active value bg color, header of dialog bg, center color and line color. Default: `#a48bd1`.
+active-text-color     | `String` | active value color and actions color. default: `white`.
+color                 | `String` | regular text color. default: `#757575`.
+disabled-color         | `String` | disabled actions and values color, default: `#ddd`.
 
 
 
