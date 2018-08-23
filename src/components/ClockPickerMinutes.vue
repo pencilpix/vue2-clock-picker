@@ -1,27 +1,23 @@
 <template>
   <div class="clock-picker__minutes">
-    <div class="minutes">
-      <div class="minutes__item"
-          v-for="item in minutes"
-          :key="item"
-          :class="{
-            ['minutes__item--' + Number(item)]: true,
-            'minutes__item--small': isSmall(item),
-            'minutes__item--selected': item === value,
-          }">
-        <button type="button" class="clock-picker__button"
-            :disabled="isDisabled(item) || shouldDisableAll"
-            :class="{'clock-picker__button--active': item === value}"
-            @click="setValue(item)">
-          {{ item }}
-        </button>
-      </div>
-    </div>
+    <clock-picker-canvas
+        :disabled="disabledRange"
+        type="mins"
+        :width="280"
+        :default-value="value"
+        :color="color"
+        :disabled-color="disabledColor"
+        :active-color="activeColor"
+        :active-text-color="activeTextColor"
+        @set="setValue($event)">
+    </clock-picker-canvas>
   </div>
 </template>
 
 
 <script>
+import ClockPickerCanvas from './ClockPickerCanvas.vue';
+
 export default {
   name: 'ClockPickerMinutes',
 
@@ -32,6 +28,18 @@ export default {
     shouldDisableFrom: { type: Boolean, default: false },
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
+    disabledHrFrom: { type: String, default: null },
+    disabledHrTo: { type: String, default: null },
+    activeColor: { type: String, default: 'black' },
+    activeTextColor: { type: String, default: 'white' },
+    color: { type: String, default: '#757575' },
+    disabledColor: { type: String, default: '#ddd' },
+  },
+
+
+
+  components: {
+    ClockPickerCanvas,
   },
 
 
@@ -58,9 +66,11 @@ export default {
      */
     disabledRange() {
       const { disabledFrom, disabledTo, shouldDisableFrom } = this;
+      const { disabledHrFrom, disabledHrTo } = this;
+      const isHrsEqual = disabledHrFrom === disabledHrTo;
 
       if (shouldDisableFrom && disabledFrom) {
-        return this.makeArray(disabledFrom, 59);
+        return this.makeArray(disabledFrom, isHrsEqual ? disabledTo : 59);
       } else if (disabledTo) {
         return this.makeArray(0, disabledTo);
       }
@@ -123,50 +133,10 @@ export default {
 
 <style lang="sass">
 @import '~theme/theme'
-+place-on-circle(minutes, item, 1, 60, 240px, 24px)
 .clock-picker
   &__minutes
     position: relative
     width: 100%
-    height: 240px
-
-    .minutes
-      position: absolute
-      top: 50%
-      left: 50%
-      margin: -120px
-
-      &__item
-        z-index: 203
-        margin: -10px
-        width: 20px
-        height: 20px
-        line-height: 20px
-
-        .clock-picker__button
-          width: 20px
-          height: 20px
-          line-height: 20px
-          position: absolute
-          top: 0
-          left: 0
-
-      &__item--small
-        width: 8px
-        margin: -4px
-        height: 8px
-        z-index: 202
-        line-height: 8px
-
-        .clock-picker__button
-          background-color: $gray-light !important
-          width: 8px
-          height: 8px
-          line-height: 8px
-          text-indent: -9999px
-          overflow: hidden
-
-          &--active
-            background-color: #a48bd1 !important
+    height: 280px
 </style>
 
