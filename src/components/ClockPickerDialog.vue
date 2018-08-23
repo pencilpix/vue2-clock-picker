@@ -6,7 +6,10 @@
 
     <transition name="scale" mode="out-in">
       <div class="clock-picker__dialog-body" v-if="opened">
-        <div class="clock-picker__dialog-header">
+        <div class="clock-picker__dialog-header" :style="{
+          backgroundColor: activeColor,
+          color: activeTextColor,
+        }">
           <span @click="isHoursSet = false">{{ hours }}</span>:<span>{{ minutes }}</span>
         </div>
         <div class="clock-picker__dialog-content">
@@ -15,7 +18,13 @@
                 v-if="!isHoursSet"
                 :disabled-from="disabledHoursFrom"
                 :disabled-to="disabledHoursTo"
+                :disabled-mins-from="disabledMinutesFrom"
+                :disabled-mins-to="disabledMinutesTo"
                 :value="hours"
+                :color="color"
+                :disabled-color="disabledColor"
+                :active-color="activeColor"
+                :active-text-color="activeTextColor"
                 @set="setHours($event)">
             </clock-picker-hours>
           </transition>
@@ -26,17 +35,25 @@
                 :should-disable-from="shouldDisableFrom"
                 :disabled-from="disabledMinutesFrom"
                 :disabled-to="disabledMinutesTo"
+                :disabled-hr-from="disabledHoursFrom"
+                :disabled-hr-to="disabledHoursTo"
                 :value="minutes"
+                :color="color"
+                :disabled-color="disabledColor"
+                :active-color="activeColor"
+                :active-text-color="activeTextColor"
                 @set="setMinutes($event)">
             </clock-picker-minutes>
           </transition>
         </div>
         <div class="clock-picker__dialog-actions">
           <button type="button" class="clock-picker__dialog-action"
+              :style="{ color: activeColor }"
               @click="cancel">{{ cancelText }}</button>
 
           <button type="button" class="clock-picker__dialog-action"
               :disabled="isDoneDisabled"
+              :style="{ color: isDoneDisabled ? disabledColor : activeColor }"
               @click="done">{{ doneText }}</button>
         </div>
       </div>
@@ -58,6 +75,10 @@ export default {
     initialValue: { type: String, default: '00:00' },
     cancelText: { type: String, default: null },
     doneText: { type: String, default: null },
+    activeColor: { type: String, default: 'black' },
+    activeTextColor: { type: String, default: 'white' },
+    color: { type: String, default: '#757575' },
+    disabledColor: { type: String, default: '#ddd' },
   },
 
 
@@ -276,7 +297,7 @@ export default {
     max-height: 100%
     overflow: auto
     width: 320px
-    margin: -180px -160px
+    margin: -235px -160px
     background-color: $white
     z-index: 201
     transform: scale(1)
@@ -285,10 +306,11 @@ export default {
 
   &-header
     padding: 1.5rem 1.5rem
-    background-color: #a48bd1
-    color: $white
+    // background-color: #a48bd1
+    // color: $white
     font-size: 2rem
     text-align: center
+    user-select: none
 
     span
       &:hover,
@@ -298,7 +320,7 @@ export default {
   &-content
     position: relative
     width: 100%
-    height: 240px
+    height: 280px
     margin-top: 24px
     margin-bottom: 24px
 
@@ -317,7 +339,7 @@ export default {
     margin: 0
     background: transparent
     border: 0
-    color: $primary
+    // color: $primary
     flex: 1
     font-size: 16px
     font-weight: 500
@@ -333,6 +355,15 @@ export default {
 
     &:active
       background-color: darken($gray-light, 6%)
+
+    &[disabled]
+      background-color: $gray-light
+      color: darken($gray-light, 6%)
+
+      &:hover,
+      &:focus,
+      &:active
+        cursor: not-allowed
 
 
   .scale-enter-active,
