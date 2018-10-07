@@ -14,7 +14,7 @@
           :name="name"
           :placeholder="placeholder"
           :class="inputClass"
-          v-model="inputValue"
+          :value="value"
           readonly
           ref="input"
           @keydown="keydown($event)"
@@ -23,7 +23,7 @@
     </div>
 
     <clock-picker-dialog ref="dialog"
-          :initial-value="hasError || !inputValue ? '--:--' : inputValue"
+          :initial-value="hasError || !value ? '--:--' : value"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           :done-text="doneText"
@@ -102,19 +102,10 @@ export default {
     return {
       isFocused: false,
       dialogOpen: false,
-      inputValue: this.value,
       showError: false,
       isTouched: false,
       uuid: this.id || ID(),
     };
-  },
-
-
-
-  watch: {
-    value() {
-      this.setValue(this.value);
-    },
   },
 
 
@@ -124,12 +115,11 @@ export default {
      * check if has error
      */
     hasError() {
-      this.validate();
-      return this.showError;
+      return this.checkErrors() && this.isTouched;
     },
 
     hasValue() {
-      return !!this.inputValue;
+      return !!this.value;
     },
   },
 
@@ -184,7 +174,7 @@ export default {
      * @param {String} time in format HH:MM
      */
     handleDone(time) {
-      this.inputValue = time;
+      this.$emit('input', time);
       this.validate();
       this.$emit('timeset', time);
       this.close();
@@ -205,7 +195,7 @@ export default {
      * @return {String} current input value in format `HH:MM`.
      */
     getValue() {
-      return this.inputValue;
+      return this.value;
     },
 
 
@@ -225,7 +215,7 @@ export default {
      */
     isValid() {
       const pattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-      return pattern.test(this.inputValue);
+      return pattern.test(this.value);
     },
 
 
@@ -252,13 +242,22 @@ export default {
 
 
     /**
+     * check if there is any error
+     * @return {Boolean} has error or not
+     */
+    checkErrors() {
+      const required = this.required && !this.value;
+      const notValid = this.value && !this.isValid();
+      const disabled = this.value && this.isDisabled(this.value);
+      return required || notValid || disabled;
+    },
+
+
+    /**
      * validate the current value of input
      */
     validate() {
-      const required = this.required && !this.inputValue;
-      const notValid = this.inputValue && !this.isValid();
-      const disabled = this.inputValue && this.isDisabled(this.inputValue);
-      this.showError = required || notValid || disabled;
+      this.showError = this.checkErrors();
       this.isTouched = true;
     },
   },

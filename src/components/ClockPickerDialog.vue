@@ -10,7 +10,9 @@
           backgroundColor: activeColor,
           color: activeTextColor,
         }">
-          <span @click="isHoursSet = false">{{ hours }}</span>:<span>{{ minutes }}</span>
+          <span @click="isHoursSet = false">{{ tempHours || hours }}</span>
+          <b>:</b>
+          <span>{{ tempMins || minutes }}</span>
         </div>
         <div class="clock-picker__dialog-content">
           <transition name="scale" mode="out-in">
@@ -25,6 +27,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                @set-temp-hours="onSetTempHours($event)"
                 @set="setHours($event)">
             </clock-picker-hours>
           </transition>
@@ -42,6 +45,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                @set-temp-mins="onSetTempMins($event)"
                 @set="setMinutes($event)">
             </clock-picker-minutes>
           </transition>
@@ -104,6 +108,8 @@ export default {
       minutes: this.initialValue.slice(3, 5),
       isHoursSet: false,
       isMinutesSet: false,
+      tempHours: '',
+      tempMins: '',
     };
   },
 
@@ -259,6 +265,22 @@ export default {
     updateTime() {
       this.hours = this.initialValue.slice(0, 2);
       this.minutes = this.initialValue.slice(3, 5);
+    },
+
+    /**
+     * set temp values
+     * to show numbers changes of hours while dragging
+     */
+    onSetTempHours(value) {
+      this.tempHours = value;
+    },
+
+    /**
+     * set temp values
+     * to show numbers changes of hours while dragging
+     */
+    onSetTempMins(value) {
+      this.tempMins = value;
     },
   },
 
