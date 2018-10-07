@@ -124,8 +124,7 @@ export default {
      * check if has error
      */
     hasError() {
-      this.validate();
-      return this.showError;
+      return this.checkErrors() && this.isTouched;
     },
 
     hasValue() {
@@ -252,13 +251,22 @@ export default {
 
 
     /**
-     * validate the current value of input
+     * check if there is any error
+     * @return {Boolean} has error or not
      */
-    validate() {
+    checkErrors() {
       const required = this.required && !this.inputValue;
       const notValid = this.inputValue && !this.isValid();
       const disabled = this.inputValue && this.isDisabled(this.inputValue);
-      this.showError = required || notValid || disabled;
+      return required || notValid || disabled;
+    },
+
+
+    /**
+     * validate the current value of input
+     */
+    validate() {
+      this.showError = this.checkErrors();
       this.isTouched = true;
     },
   },
