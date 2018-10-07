@@ -83,6 +83,7 @@ export default {
       this.setTypography();
       this.drawNumbers();
     },
+
     /**
      * save the canvas from ref to the component
      * context for ease of use
@@ -92,6 +93,7 @@ export default {
       this.$canvas = this.$refs.canvas;
       this.ctx = this.$canvas.getContext('2d');
     },
+
     /**
      * set the width and height depending on device
      * pixel ratio
@@ -104,6 +106,7 @@ export default {
       this.radius = (width / 2) - (gisture / 2);
       return { x: width / 2, y: width / 2 };
     },
+
     /**
      * set typography settings
      */
@@ -113,6 +116,7 @@ export default {
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
     },
+
     /**
      * map each no to it's equivlant angle and round.
      * round determine the number of complete cirlce.
@@ -140,6 +144,7 @@ export default {
         };
       }
     },
+
     /**
      * draw the number in the anglesMap
      * depending on its angle and round.
@@ -186,6 +191,7 @@ export default {
       regular.forEach(point => this.drawNormalValue(...point));
       this.drawValue(...value);
     },
+
     /**
      * draw disabled value
      * it can be a number or event a dot
@@ -205,6 +211,7 @@ export default {
 
       this.drawCircle(x, y, 2, this.disabledColor);
     },
+
     /**
      * draw the active value
      * depending on if hour it will be no
@@ -222,6 +229,7 @@ export default {
         this.drawCircle(x, y, 3, this.activeTextColor);
       }
     },
+
     /**
      * draw the normal value
      * depending on if hour it will be no
@@ -237,6 +245,7 @@ export default {
 
       this.drawCircle(x, y, 2, this.activeColor, 0.3);
     },
+
     /**
      * check if should draw the number or not
      * @param {String} no
@@ -246,6 +255,7 @@ export default {
       const isFive = Number(no) % 5 === 0;
       return this.type === 'hours' || isFive;
     },
+
     /**
      * draw circle at given point
      * @param {Number} x center.x value
@@ -275,6 +285,7 @@ export default {
       this.ctx.restore();
       this.ctx.globalAlpha = 1;
     },
+
     /**
      * draw line from center to a given point
      * __note__ global alpha will be the same as this.alpha
@@ -295,6 +306,7 @@ export default {
       this.ctx.restore();
       this.ctx.globalAlpha = 1;
     },
+
     /**
      * zero pad numbers to be in format '01' or '12' ... etc.
      * @param {Number} no
@@ -304,6 +316,7 @@ export default {
       const str = `00${no}`;
       return str.slice(str.length - 2);
     },
+
     /**
      * rounds angle to be from 0 to 359
      * @param {Number} angle in degrees
@@ -314,6 +327,7 @@ export default {
       const factor = Math.floor(angleFinal / 360);
       return angleFinal - (360 * factor);
     },
+
     /**
      * calculate point to draw and get selected value
      * from event
@@ -327,6 +341,7 @@ export default {
       this.getSelectedNo(setValue);
       this.drawNumbers(setValue);
     },
+
     /**
      * calculate radius, x, y, angle and round
      * of the last event 'touch' or 'mouse'
@@ -355,6 +370,7 @@ export default {
       this.lastEvent = Object.assign(this.lastEvent, { x, y, angle, radius, round });
       return this.lastEvent;
     },
+
     /**
      * calculate the value should be selected
      * from the angles map depending on the last event value.
@@ -382,6 +398,7 @@ export default {
 
       this.lastEvent.value = final;
     },
+
     /**
      * on event mousedown
      * enable track the movement of mouse
@@ -389,6 +406,7 @@ export default {
     onMouseDown() {
       this.moveStart = true;
     },
+
     /**
      * onmouse move calculate and draw lastEvent value
      * @param {MouseEvent} event
@@ -404,6 +422,7 @@ export default {
         this.scheduled = false;
       }, this.throttleDelay);
     },
+
     /**
      * on mouseup end of movement tracking
      * and set the last value
@@ -413,6 +432,7 @@ export default {
       this.moveStart = false;
       this.onPointChange(event, true);
     },
+
     /**
      * on event touchstart
      * enable track the movement of touch
@@ -420,6 +440,7 @@ export default {
     onTouchStart() {
       this.moveStart = true;
     },
+
     /**
      * on touchmove calculate and draw lastEvent value
      * @param {TouchEvent} event
@@ -436,6 +457,7 @@ export default {
         this.scheduled = false;
       }, this.throttleDelay);
     },
+
     /**
      * on touchend end of movement tracking
      * and set the last value
@@ -446,7 +468,6 @@ export default {
       this.onPointChange(changedTouches[0], true);
       this.moveStart = false;
     },
-
   },
 
 
