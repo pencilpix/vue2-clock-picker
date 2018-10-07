@@ -9,8 +9,15 @@
 </head>
 <body>
   <div id="app">
-    <vue-clock-picker label="time 1" id="clock-picker-1" done-text="ok" cancel-text="close"></vue-clock-picker>
-    <vue-clock-picker label="time 2" id="clock-picker-2"></vue-clock-picker>
+    <vue-clock-picker
+        v-model="anotherValue"
+        required
+        label="time 1"
+        id="clock-picker-1"
+        disabled-from="03:00"
+        disabled-to="05:30"
+        done-text="ok" cancel-text="close"></vue-clock-picker>
+    <vue-clock-picker v-model="value" label="time 2" id="clock-picker-2"></vue-clock-picker>
   </div>
 
 
@@ -19,7 +26,13 @@
   <script src="../dist/vue2-clock-picker.min.js"></script>
   <script>
     const app = new Vue({
-      el: '#app'
+      el: '#app',
+      data() {
+        return {
+          value: '00:03',
+          anotherValue: '',
+        }
+      }
     })
   </script>
 </body>
