@@ -388,6 +388,7 @@ export default {
         return angle === finalAngle && round === this.lastEvent.round;
       });
 
+      if (setValue) this.$emit('value-change', '');
       if (this.disabled.includes(final)) return;
 
       if (setValue) {
@@ -396,6 +397,7 @@ export default {
         return;
       }
 
+      this.$emit('value-change', final);
       this.lastEvent.value = final;
     },
 

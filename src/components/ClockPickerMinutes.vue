@@ -9,6 +9,7 @@
         :disabled-color="disabledColor"
         :active-color="activeColor"
         :active-text-color="activeTextColor"
+        @value-change="$emit('set-temp-mins', $event)"
         @set="setValue($event)">
     </clock-picker-canvas>
   </div>
