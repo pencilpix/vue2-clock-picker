@@ -23,10 +23,13 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-  <script src="../dist/vue2-clock-picker.min.js"></script>
+  <script src="../dist/vue2-clock-picker.js"></script>
   <script>
     const app = new Vue({
       el: '#app',
+      components: {
+        VueClockPicker,
+      },
       data() {
         return {
           value: '00:03',
