@@ -25,7 +25,7 @@ $ yarn add @pencilpix/vue2-clock-picker
 
     <script src="node_modules/vuejs/dist/vue.min.js"></script>
     <!-- plugin will register the component globally in the global vue instance -->
-    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.plugin.js">
+    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.plugin.js"></script>
 
 
     <!-- if for any reason need to install the plugin manually -->
@@ -40,7 +40,7 @@ $ yarn add @pencilpix/vue2-clock-picker
 
 
     <script src="node_modules/vuejs/dist/vue.min.js"></script>
-    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.js">
+    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.js"></script>
     <script>
       const app = new Vue({
         // ...
@@ -48,7 +48,7 @@ $ yarn add @pencilpix/vue2-clock-picker
           VueClockPicker, //  bundle makes the component globally available for registering
         },
         // ...
-      })
+      });
     </script>
     ```
 
