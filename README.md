@@ -18,28 +18,69 @@ $ yarn add @pencilpix/vue2-clock-picker
 ```
 
   - __In Browser:__
-
+    1. via plugin
     ```html
     <link href="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css"/>
 
 
     <script src="node_modules/vuejs/dist/vue.min.js"></script>
-    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.js">
+    <!-- plugin will register the component globally in the global vue instance -->
+    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.plugin.js">
+
+
+    <!-- if for any reason need to install the plugin manually -->
+    <script>
+    Vue.use(VueClockPickerPlugin) // since the plugin is globally available
+    </script>
+    ```
+
+    2. via per component
+    ```html
+    <link href="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css"/>
+
+
+    <script src="node_modules/vuejs/dist/vue.min.js"></script>
+    <script src="node_modules/@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.js">
+    <script>
+      const app = new Vue({
+        // ...
+        components: {
+          VueClockPicker, //  bundle makes the component globally available for registering
+        },
+        // ...
+      })
+    </script>
     ```
 
   - __Module:__
+      1. per component
       ```js
       import VueClockPicker from '@pencilpix/vue2-clock-picker';
       import '@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css';
+
+      export default {
+        // ...
+        components: {
+          VueClockPicker,
+        }
+        // ...
+      }
+
       ```
 
+      2. global plugin
+      ```js
+      import '@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.min.css';
+      const VueClockPickerPlugin = require('@pencilpix/vue2-clock-picker/dist/vue2-clock-picker.plugin.js')
+      Vue.use(VueClockPickerPlugin)
+      ```
 
 ### Usage
 
 once component is installed it can be used as:
 
 ```html
-<vue-clock-picker></vue-clock-picker>
+<vue-clock-picker v-model="value"></vue-clock-picker>
 ```
 
 

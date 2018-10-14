@@ -74,8 +74,7 @@
     margin: -235px -160px;
     background-color: #fff;
     z-index: 201;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     border-radius: 5px;
     overflow: auto;
 }
@@ -103,13 +102,10 @@
       position: absolute;
 }
 .clock-picker__dialog-actions {
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+        flex-direction: row;
     border-top: 1px solid #f5f5f5;
     padding: .5rem;
 }
@@ -118,9 +114,8 @@
     margin: 0;
     background: transparent;
     border: 0;
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+    -ms-flex: 1;
+        flex: 1;
     font-size: 16px;
     font-weight: 500;
     line-height: 32px;
@@ -152,8 +147,7 @@
 .clock-picker__dialog .scale-enter,
   .clock-picker__dialog .scale-leave-active {
     opacity: 0;
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
 }
 .clock-picker__dialog .fade-enter,
   .clock-picker__dialog .fade-leave-active {
