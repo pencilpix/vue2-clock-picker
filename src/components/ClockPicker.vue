@@ -32,6 +32,7 @@
           :active-color="activeColor"
           :active-text-color="activeTextColor"
           :close-on-overlay="closeOnOverlay"
+          :font="font"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -90,6 +91,7 @@ export default {
     disabledColor: { type: String, default: '#ddd' },
     closeOnEsc: { type: Boolean, default: false },
     closeOnOverlay: { type: Boolean, default: false },
+    font: { type: String, default: 'Roboto, arial, san-serif' },
   },
 
 

@@ -8,6 +8,7 @@
         :disabled-color="disabledColor"
         :active-color="activeColor"
         :active-text-color="activeTextColor"
+        :font="font"
         @value-change="$emit('set-temp-hours', $event)"
         @set="setValue($event)">
     </clock-picker-canvas>
@@ -32,6 +33,7 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    font: { type: String, default: '' },
   },
 
 

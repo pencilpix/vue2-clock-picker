@@ -9,6 +9,7 @@
         <div class="clock-picker__dialog-header" :style="{
           backgroundColor: activeColor,
           color: activeTextColor,
+          fontFamily: font,
         }">
           <span @click="isHoursSet = false">{{ tempHours || hours }}</span>
           <b>:</b>
@@ -27,6 +28,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                :font="font"
                 @set-temp-hours="onSetTempHours($event)"
                 @set="setHours($event)">
             </clock-picker-hours>
@@ -45,6 +47,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                :font="font"
                 @set-temp-mins="onSetTempMins($event)"
                 @set="setMinutes($event)">
             </clock-picker-minutes>
@@ -84,6 +87,7 @@ export default {
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
     closeOnOverlay: { type: Boolean, default: false },
+    font: { type: String, default: '' },
   },
 
 
