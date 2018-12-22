@@ -109,7 +109,7 @@ export default {
       showError: false,
       isTouched: false,
       uuid: this.id || ID(),
-      errors: {},
+      timeErrors: {},
     };
   },
 
@@ -253,7 +253,7 @@ export default {
       const required = this.required && !this.value;
       const notValid = this.value && !this.isValid();
       const disabled = this.value && this.isDisabled(this.value);
-      this.errors = Object.assign(this.errors, { required, notValid, disabled });
+      this.timeErrors = Object.assign(this.timeErrors, { required, notValid, disabled });
       return required || notValid || disabled;
     },
 
