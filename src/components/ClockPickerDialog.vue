@@ -1,7 +1,7 @@
 <template>
   <div class="clock-picker__dialog" :class="{ 'clock-picker__dialog--active': opened }">
     <transition name="fade" mode="out-in">
-      <div class="clock-picker__dialog-drop" v-if="opened" @click="close"></div>
+      <div class="clock-picker__dialog-drop" v-if="opened" @click="cancel"></div>
     </transition>
 
     <transition name="scale" mode="out-in">
