@@ -17,7 +17,6 @@
           :value="value"
           readonly
           ref="input"
-          @keydown="keydown($event)"
           @click="open">
       <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
     </div>
@@ -32,6 +31,7 @@
           :disabled-color="disabledColor"
           :active-color="activeColor"
           :active-text-color="activeTextColor"
+          :close-on-overlay="closeOnOverlay"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -88,6 +88,8 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    closeOnEsc: { type: Boolean, default: false },
+    closeOnOverlay: { type: Boolean, default: false },
   },
 
 
@@ -164,7 +166,7 @@ export default {
     /**
      * bind Escape key to Cancel.
      */
-    keydown(e) {
+    onKeydown(e) {
       if (e.key === 'Escape') {
         this.cancel();
       }
@@ -266,6 +268,16 @@ export default {
   mounted() {
     if (this.value) {
       this.validate();
+    }
+
+    if (this.closeOnEsc) {
+      document.body.addEventListener('keydown', this.onKeydown);
+    }
+  },
+
+  destroy() {
+    if (this.closeOnEsc) {
+      document.body.removeEventListener('keydown', this.onKeydown);
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="clock-picker__dialog" :class="{ 'clock-picker__dialog--active': opened }">
     <transition name="fade" mode="out-in">
-      <div class="clock-picker__dialog-drop" v-if="opened" @click="cancel"></div>
+      <div class="clock-picker__dialog-drop" v-if="opened" @click="onOverlayClick()"></div>
     </transition>
 
     <transition name="scale" mode="out-in">
@@ -83,6 +83,7 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    closeOnOverlay: { type: Boolean, default: false },
   },
 
 
@@ -281,6 +282,12 @@ export default {
      */
     onSetTempMins(value) {
       this.tempMins = value;
+    },
+
+    onOverlayClick() {
+      if (this.closeOnOverlay) {
+        this.cancel();
+      }
     },
   },
 
