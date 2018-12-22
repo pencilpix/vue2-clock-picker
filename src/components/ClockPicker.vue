@@ -17,7 +17,6 @@
           :value="value"
           readonly
           ref="input"
-          @keydown="keydown($event)"
           @click="open">
       <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
     </div>
@@ -32,6 +31,8 @@
           :disabled-color="disabledColor"
           :active-color="activeColor"
           :active-text-color="activeTextColor"
+          :close-on-overlay="closeOnOverlay"
+          :font="font"
           @cancel="cancel($event)"
           @done="handleDone($event)">
     </clock-picker-dialog>
@@ -88,6 +89,9 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    closeOnEsc: { type: Boolean, default: false },
+    closeOnOverlay: { type: Boolean, default: false },
+    font: { type: String, default: 'Roboto, arial, san-serif' },
   },
 
 
@@ -105,6 +109,7 @@ export default {
       showError: false,
       isTouched: false,
       uuid: this.id || ID(),
+      errors: {},
     };
   },
 
@@ -163,7 +168,7 @@ export default {
     /**
      * bind Escape key to Cancel.
      */
-    keydown(e) {
+    onKeydown(e) {
       if (e.key === 'Escape') {
         this.cancel();
       }
@@ -225,19 +230,18 @@ export default {
      * @return {Boolean}
      */
     isDisabled(value) {
-      const hS = Number(this.disabledFrom.slice(0, 2));
-      const hE = Number(this.disabledTo.slice(0, 2));
-      const mS = Number(this.disabledFrom.slice(3));
-      const mE = Number(this.disabledTo.slice(3));
-      const vH = Number(value.slice(0, 2));
-      const vM = Number(value.slice(3));
-
-      return (hS === hE && hS === vH && mS === 0 && mE === 59) ||
-        (hS === hE && hS === vH && vM >= mS && vM <= mE) ||
-        (hS < hE && vH === hS && mS <= vM) ||
-        (hS < hE && vH === hE && mE >= vM) ||
-        (hS < hE && vH > hS && vH < hE) ||
-        (hS > hE);
+      const startHr = parseInt(this.disabledFrom.slice(0, 2), 10);
+      const endHr = parseInt(this.disabledTo.slice(0, 2), 10);
+      const startMin = parseInt(this.disabledFrom.slice(3), 10);
+      const endMin = parseInt(this.disabledTo.slice(3), 10);
+      const valueHr = parseInt(value.slice(0, 2), 10);
+      const valueMin = parseInt(value.slice(3), 10);
+      return (startHr === endHr && startHr === valueHr && startMin === 0 && endMin === 59) ||
+        (startHr === endHr && startHr === valueHr && valueMin >= startMin && valueMin <= endMin) ||
+        (startHr < endHr && valueHr === startHr && startMin <= valueMin) ||
+        (startHr < endHr && valueHr === endHr && endMin >= valueMin) ||
+        (startHr < endHr && valueHr > startHr && valueHr < endHr) ||
+        (startHr > endHr);
     },
 
 
@@ -249,6 +253,7 @@ export default {
       const required = this.required && !this.value;
       const notValid = this.value && !this.isValid();
       const disabled = this.value && this.isDisabled(this.value);
+      this.errors = Object.assign(this.errors, { required, notValid, disabled });
       return required || notValid || disabled;
     },
 
@@ -265,6 +270,16 @@ export default {
   mounted() {
     if (this.value) {
       this.validate();
+    }
+
+    if (this.closeOnEsc) {
+      document.body.addEventListener('keydown', this.onKeydown);
+    }
+  },
+
+  destroy() {
+    if (this.closeOnEsc) {
+      document.body.removeEventListener('keydown', this.onKeydown);
     }
   },
 };

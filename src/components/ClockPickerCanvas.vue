@@ -38,6 +38,7 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    font: { type: String, default: '' },
   },
 
 
@@ -112,7 +113,7 @@ export default {
      */
     setTypography() {
       const size = this.pxRatio * 14;
-      this.ctx.font = `normal normal 500 ${size}px Roboto`;
+      this.ctx.font = `normal normal 500 ${size}px ${this.font}`;
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
     },

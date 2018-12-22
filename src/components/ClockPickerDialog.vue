@@ -1,7 +1,7 @@
 <template>
   <div class="clock-picker__dialog" :class="{ 'clock-picker__dialog--active': opened }">
     <transition name="fade" mode="out-in">
-      <div class="clock-picker__dialog-drop" v-if="opened" @click="close"></div>
+      <div class="clock-picker__dialog-drop" v-if="opened" @click="onOverlayClick()"></div>
     </transition>
 
     <transition name="scale" mode="out-in">
@@ -9,6 +9,7 @@
         <div class="clock-picker__dialog-header" :style="{
           backgroundColor: activeColor,
           color: activeTextColor,
+          fontFamily: font,
         }">
           <span @click="isHoursSet = false">{{ tempHours || hours }}</span>
           <b>:</b>
@@ -27,6 +28,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                :font="font"
                 @set-temp-hours="onSetTempHours($event)"
                 @set="setHours($event)">
             </clock-picker-hours>
@@ -45,6 +47,7 @@
                 :disabled-color="disabledColor"
                 :active-color="activeColor"
                 :active-text-color="activeTextColor"
+                :font="font"
                 @set-temp-mins="onSetTempMins($event)"
                 @set="setMinutes($event)">
             </clock-picker-minutes>
@@ -83,6 +86,8 @@ export default {
     activeTextColor: { type: String, default: 'white' },
     color: { type: String, default: '#757575' },
     disabledColor: { type: String, default: '#ddd' },
+    closeOnOverlay: { type: Boolean, default: false },
+    font: { type: String, default: '' },
   },
 
 
@@ -281,6 +286,12 @@ export default {
      */
     onSetTempMins(value) {
       this.tempMins = value;
+    },
+
+    onOverlayClick() {
+      if (this.closeOnOverlay) {
+        this.cancel();
+      }
     },
   },
 
