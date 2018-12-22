@@ -108,6 +108,9 @@ active-color          | `String` | active value bg color, header of dialog bg, c
 active-text-color     | `String` | active value color and actions color. default: `white`.
 color                 | `String` | regular text color. default: `#757575`.
 disabled-color         | `String` | disabled actions and values color, default: `#ddd`.
+close-on-esc           | `Boolean` | enable close on `ESC` key press, default `false`.
+close-on-overlay       | `Boolean` | enable closing dialog on overlay click, default `false`.
+font                   | `String`  | font family used in canvas, default `Roboto, arial, san-serif`
 
 
 
