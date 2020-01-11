@@ -230,6 +230,8 @@ export default {
      * @return {Boolean}
      */
     isDisabled(value) {
+      if(this.disabledFrom ==='' && this.disabledTo==='') { return false; }
+
       const startHr = parseInt(this.disabledFrom.slice(0, 2), 10);
       const endHr = parseInt(this.disabledTo.slice(0, 2), 10);
       const startMin = parseInt(this.disabledFrom.slice(3), 10);
