@@ -104,7 +104,7 @@ export default {
      * @return {Boolean}
      */
     isDisabled(item) {
-      return this.disabledRange.includes(item);
+      return this.disabledRange.indexOf(item) > -1;
     },
 
 

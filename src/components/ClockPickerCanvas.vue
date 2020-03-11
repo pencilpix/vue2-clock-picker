@@ -168,7 +168,7 @@ export default {
         const x = radius * Math.cos(angle * (Math.PI / 180));
         const y = radius * Math.sin(angle * (Math.PI / 180));
 
-        if (this.disabled.includes(no)) {
+        if (this.disabled.indexOf(no) > -1) {
           disabled.push([no, x, y]);
         } else if (drawValue && this.value === no) {
           value.push(no, x, y);
@@ -350,8 +350,8 @@ export default {
     calculateLastEvent({ clientX, clientY }) {
       const gisture = this.gisture * this.pxRatio;
       const bound = this.$canvas.getBoundingClientRect();
-      const canvX = bound.x + (this.width / 2);
-      const canvY = bound.y + (this.width / 2);
+      const canvX = bound.left + (this.width / 2);
+      const canvY = bound.top + (this.width / 2);
       const x = clientX - canvX;
       const y = clientY - canvY;
       const radians = Math.atan(y / x);
@@ -383,14 +383,14 @@ export default {
       const no = Math.floor(this.lastEvent.angle / factor);
       const ang = factor * (no + rem);
 
-      const final = Object.keys(this.anglesMap).find((key) => {
+      const final = Object.keys(this.anglesMap).filter((key) => {
         const { angle, round } = this.anglesMap[key];
         const finalAngle = ang >= 360 ? ang - 360 : ang;
         return angle === finalAngle && round === this.lastEvent.round;
-      });
+      })[0];
 
       if (setValue) this.$emit('value-change', '');
-      if (this.disabled.includes(final)) return;
+      if (this.disabled.indexOf(final) > -1) return;
 
       if (setValue) {
         this.value = final;
@@ -477,7 +477,7 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
-      const isDisabled = this.disabled.includes(this.defaultValue);
+      const isDisabled = this.disabled.indexOf(this.defaultValue) > -1;
       this.value = isDisabled ? '--' : this.defaultValue;
       this.init();
     });
