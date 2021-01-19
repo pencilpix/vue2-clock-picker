@@ -18,7 +18,9 @@
           readonly
           ref="input"
           @click="open">
-      <slot name="error">{{hasError && isTouched ? 'Error' : ''}}</slot>
+      <slot name="error" :has-error="hasError" :is-touched="isTouched">
+        {{ hasError && isTouched ? 'Error' : '' }}
+      </slot>
     </div>
 
     <clock-picker-dialog ref="dialog"
