@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible"
+        content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="../dist/vue2-clock-picker.min.css">
+  <link rel="stylesheet"
+        href="../dist/vue2-clock-picker.min.css">
 </head>
+
 <body>
   <div id="app">
-    <vue-clock-picker
-        v-model="anotherValue"
-        required
-        label="time 1"
-        id="clock-picker-1"
-        disabled-from="03:00"
-        disabled-to="05:30"
-        done-text="ok" cancel-text="close"></vue-clock-picker>
-    <vue-clock-picker v-model="value" label="time 2" id="clock-picker-2"></vue-clock-picker>
-  </div>
+    <vue-clock-picker v-model="anotherValue"
+                      required
+                      close-on-esc
+                      label="time 1"
+                      id="clock-picker-1"
+                      disabled-from="03:40"
+                      disabled-to="23:30"
+                      done-text="Ok"
+                      cancel-text="Close">
+    </vue-clock-picker>
 
+    <vue-clock-picker v-model="value"
+                      label="time 2"
+                      close-on-esc
+                      :disabled-fn="disabledFn"
+                      id="clock-picker-2">
+    </vue-clock-picker>
+    
+    <vue-clock-picker v-model="value3"
+                      label="time 3"
+                      close-on-esc
+                      id="clock-picker-2">
+    </vue-clock-picker>
+  </div>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
@@ -34,9 +52,20 @@
         return {
           value: '00:03',
           anotherValue: '',
+          value3: '',
+        }
+      },
+      methods: {
+        disabledFn(hours, minute ) {
+          if ( minute === null ){
+            return hours % 2 === 0; 
+          }else{
+            return minute % 2 !== 0;
+          }
         }
       }
     })
   </script>
 </body>
+
 </html>
