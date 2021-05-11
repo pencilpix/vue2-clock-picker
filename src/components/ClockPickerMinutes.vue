@@ -24,19 +24,23 @@ export default {
   name: 'ClockPickerMinutes',
 
   props: {
-    buttonClass: { type: String },
-    value: { type: String },
-    shouldDisableAll: { type: Boolean, default: false },
-    shouldDisableFrom: { type: Boolean, default: false },
-    disabledFrom: { type: String, default: null },
-    disabledTo: { type: String, default: null },
-    disabledHrFrom: { type: String, default: null },
-    disabledHrTo: { type: String, default: null },
-    activeColor: { type: String, default: 'black' },
-    activeTextColor: { type: String, default: 'white' },
-    color: { type: String, default: '#757575' },
-    disabledColor: { type: String, default: '#ddd' },
-    font: { type: String, default: '' },
+    buttonClass       : { type: String },
+    hours             : { type: String },
+    value             : { type: String },
+    shouldDisableAll  : { type: Boolean, default: false },
+    shouldDisableFrom : { type: Boolean, default: false },
+
+    disabledFn : { type: Function, default: null },
+
+    disabledFrom    : { type: String, default: null },
+    disabledTo      : { type: String, default: null },
+    disabledHrFrom  : { type: String, default: null },
+    disabledHrTo    : { type: String, default: null },
+    activeColor     : { type: String, default: 'black' },
+    activeTextColor : { type: String, default: 'white' },
+    color           : { type: String, default: '#757575' },
+    disabledColor   : { type: String, default: '#ddd' },
+    font            : { type: String, default: '' },
   },
 
 
@@ -68,6 +72,10 @@ export default {
      * @return {Array<String>} in format MM or empty [].
      */
     disabledRange() {
+      if ( this.disabledFn ){
+        return this.minutes.filter(minute => this.disabledFn(this.hours, minute));
+      }
+
       const { disabledFrom, disabledTo, shouldDisableFrom } = this;
       const { disabledHrFrom, disabledHrTo } = this;
       const isHrsEqual = disabledHrFrom === disabledHrTo;

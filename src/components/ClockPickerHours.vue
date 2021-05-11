@@ -24,16 +24,17 @@ export default {
   name: 'ClockPickerHours',
 
   props: {
-    value: { type: String, default: '00' },
-    disabledFrom: { type: String, default: null },
-    disabledTo: { type: String, default: null },
-    disabledMinsFrom: { type: String, default: null },
-    disabledMinsTo: { type: String, default: null },
-    activeColor: { type: String, default: 'black' },
-    activeTextColor: { type: String, default: 'white' },
-    color: { type: String, default: '#757575' },
-    disabledColor: { type: String, default: '#ddd' },
-    font: { type: String, default: '' },
+    value            : { type: String, default: '00' },
+    disabledFn       : { type: Function, default: null },
+    disabledFrom     : { type: String, default: null },
+    disabledTo       : { type: String, default: null },
+    disabledMinsFrom : { type: String, default: null },
+    disabledMinsTo   : { type: String, default: null },
+    activeColor      : { type: String, default: 'black' },
+    activeTextColor  : { type: String, default: 'white' },
+    color            : { type: String, default: '#757575' },
+    disabledColor    : { type: String, default: '#ddd' },
+    font             : { type: String, default: '' },
   },
 
 
@@ -57,6 +58,10 @@ export default {
      * @return {Array<String>} in format HH or empty [].
      */
     disabledRange() {
+      if ( this.disabledFn ) {
+        return this.makeArray(0, 23).filter(h => this.disabledFn(h, null));
+      }
+
       const { disabledFrom, disabledTo } = this;
       const { disabledMinsFrom, disabledMinsTo } = this;
       const fromStart = disabledMinsFrom === '00' ? 0 : 1;

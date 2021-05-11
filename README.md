@@ -97,11 +97,13 @@ input-container-class | `String`| css custom class to be applied to input contai
 input-value-class | `String`| css custom class to be applied to input container when input contains value. default `clock-picker__input--has-value`.
 input-focus-class | `String` | css custom class to be applied to input container when the input is focused. default `clock-picker__input--focused`.
 input-error-class | `String` | css custom class to be applied to input container when the value not match `HH:MM` or the input is required and the value is empty. default `clock-picker__input--error`.
-label-class       | `String | custom class name of label. default: `clock-picker__label`
+label-class       | `String` | custom class name of label. default: `clock-picker__label`
 value                 | `String` | initial value of input. default `''`
 required              | `Boolean` | set it to true if time field is required. default `false`
 disabled-from         | `String` | value of time to disable from until `disabled-to` value or to the end. default `null`.
 disabled-to           | `String` | value of time to disable from `disabled-to` time value or from 00:00 to, default `null`.
+disabled-fn           | `Function` | (Hour, minute) => boolean; A function to expose the disable logic. If passed, "disabled-from" and "disabled-to" are ignored.
+Param
 done-text             | `String` | done button text, default `done`.
 cancel-text           | `String` | cancel button text, default `cancel`.
 active-color          | `String` | active value bg color, header of dialog bg, center color and line color. Default: `#a48bd1`.

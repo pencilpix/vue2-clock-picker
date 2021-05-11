@@ -19,6 +19,7 @@
           <transition name="scale" mode="out-in">
             <clock-picker-hours
                 v-if="!isHoursSet"
+                :disabled-fn="disabledFn"
                 :disabled-from="disabledHoursFrom"
                 :disabled-to="disabledHoursTo"
                 :disabled-mins-from="disabledMinutesFrom"
@@ -36,12 +37,14 @@
           <transition name="scale" mode="out-in">
             <clock-picker-minutes
                 v-if="isHoursSet"
+                :disabled-fn="disabledFn"
                 :should-disable-all="shouldDisableAllMinutes"
                 :should-disable-from="shouldDisableFrom"
                 :disabled-from="disabledMinutesFrom"
                 :disabled-to="disabledMinutesTo"
                 :disabled-hr-from="disabledHoursFrom"
                 :disabled-hr-to="disabledHoursTo"
+                :hours="hours"
                 :value="minutes"
                 :color="color"
                 :disabled-color="disabledColor"
@@ -77,6 +80,7 @@ export default {
   name: 'ClockPickerDialog',
 
   props: {
+    disabledFn: { type: Function, default: null },
     disabledFrom: { type: String, default: null },
     disabledTo: { type: String, default: null },
     initialValue: { type: String, default: '00:00' },
