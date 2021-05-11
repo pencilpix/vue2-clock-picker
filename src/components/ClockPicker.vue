@@ -23,6 +23,7 @@
 
     <clock-picker-dialog ref="dialog"
           :initial-value="hasError || !value ? '--:--' : value"
+          :disabled-fn="disabledFn"
           :disabled-from="disabledFrom"
           :disabled-to="disabledTo"
           :done-text="doneText"
@@ -81,6 +82,7 @@ export default {
     id: { type: String, default: null },
     required: { type: Boolean, default: false },
     value: { type: String, default: '' },
+    disabledFn: { type: Function, default: null },
     disabledFrom: { type: String, default: '' },
     disabledTo: { type: String, default: '' },
     doneText: { type: String, default: 'done' },
